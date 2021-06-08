@@ -1,5 +1,5 @@
 package di.step2;
-//DI 약간 구현, 외부환경 변화에 따라 내부환경도 변화해야 한다.
+//DI 약간 있음 외부환경 변화에 따라 내부환경도 변화해야 한다.
 public class DiStep2Main {
 	Tizen t;
 	public void run(Tizen t) {
