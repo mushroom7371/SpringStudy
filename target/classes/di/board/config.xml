@@ -16,6 +16,10 @@
 	<bean id='board' class='di.board.BoardDao'/>
 	<bean id='file' class='di.board.FileDao'/>
 	
+	<!-- 
 	<bean id='byType' class='di.board.BoardService' autowire='byType'/>
-	
+	 -->
+	 
+	 <bean id='byType' class='di.board.BoardService'/>
+	 
 </beans>

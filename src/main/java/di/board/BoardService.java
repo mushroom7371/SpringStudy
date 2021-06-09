@@ -1,11 +1,19 @@
 package di.board;
 
-public class BoardService {
-	FileDao filefile;
+import org.springframework.beans.factory.annotation.Autowired;
 
-	public void setFilefile(FileDao filefile) {
-		this.filefile = filefile;
-	}
+public class BoardService {
+
+//
+//	public void setFilefile(FileDao filefile) {
+//		this.filefile = filefile;
+//	}
+//
+
+	@Autowired
+	FileDao filefile;
+	@Autowired
+	BoardDao boardboard; 
 
 	public void output() {
 		filefile.insert();
