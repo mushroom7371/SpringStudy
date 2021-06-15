@@ -17,10 +17,11 @@
 		
 	<context:annotation-config/>
 	
-	<bean id='daoSample' class='mvc.BoardDao'/>
-	<bean id='brdCtrlSample' class='mvc.BoardController' />
+	<bean id='dao' class='board.BoardDao'/>
+	<bean id='upload' class='board.BoardFileUploadController'/>
+	<bean id='brdCtrl' class='board.BoardController' />
 	
-	<bean id='viewResolverSample'
+	<bean id='viewResolver'
 			class='org.springframework.web.servlet.view.InternalResourceViewResolver'>
 			<property name='prefix' value='/board/'/>
 			<property name='suffix' value='.jsp'/>

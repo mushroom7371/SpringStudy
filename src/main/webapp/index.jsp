@@ -5,11 +5,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>인덱인덱스</title>
+<script src='./js/board.js'></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-	<div id='index'>
-	<a href='board/search.board'>조회</a>
-	</div>
+<div id='index'>
+	<h2>Spring MVC</h2>
+	<a href='board/search.board'>조회(연습)</a>
+	<input type='button' value='게시판' onclick='brd.home()'/>
+	
+	<hr/>
+	<div id='board'></div>
+	
+	
+	
+</div>
 </body>
 </html>
