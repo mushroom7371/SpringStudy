@@ -38,7 +38,9 @@ brd.init = function(){
 			contentType : false,	//form 태그의 정보를 text가 아닌 bianary로 전달하라는 의미
 			processData : false,	//form 태그의 정보를 text가 아닌 bianary로 전달하라는 의미
 			success : function(resp){
-				$('#board').load('registerR.brd');
+				frm = $('#frm_board')[0];
+				param = $(frm).serialize();
+				$('#board').load('registerR.brd', param);
 			}
 		});
 		

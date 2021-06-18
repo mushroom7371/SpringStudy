@@ -45,7 +45,7 @@ public class BoardController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/fup.brd", method=RequestMethod.POST)
+	@RequestMapping(value="/fup.brd", method= RequestMethod.POST)
 	public void  upload(HttpServletRequest req){
 		attList = fileUpload.upload(req);
 		System.out.println(attList.size());
