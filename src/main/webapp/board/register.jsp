@@ -34,7 +34,6 @@
 		
 		<input type='text' name='nowPage' value='${param.nowPage }'/>
 		<input type='text' name='findStr' value='${param.findStr }'/>
-		<input type='text' name='serial' value='${param.serial }'/>
 	</form>
 	
 	<form name='frm_upload' id='frm_upload' method='post'>

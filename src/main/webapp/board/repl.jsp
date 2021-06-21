@@ -34,11 +34,15 @@
 		<input type='password' name='pwd' />
 		<br/>
 
+	<input type='hidden' name='nowPage' value='${param.nowPage }'/>		
+	<input type='hidden' name='findStr' value='${param.findStr }'/>		
+	<input type='hidden' name='serial' value='${param.serial }'/>		
+
 	</form>
 	
 	<form name='frm_upload' id='frm_upload' method='post'>
 		<label>파일첨부</label>
-		<input type='file' id='attfile' multiple/>
+		<input type='file' name='attfile' id='attfile' multiple/>
 			
 		<div id='image_preview'>
 			<div id='attzone'></div>
@@ -50,11 +54,6 @@
 		<input type='button' value='취소' id='btnSearch'>
 	</div>
 	
-	<input type='hidden' name='nowPage' value='${param.nowPage }'/>		
-	<input type='hidden' name='findStr' value='${param.findStr }'/>		
-	<input type='hidden' name='serial' value='${param.serial }'/>		
-	
-
 		
 </div>
 <script>

@@ -18,25 +18,36 @@
 	<form name='frm_board' id='frm_board' method='post' action=''>
 		
 		<label>작성자</label>
-		<input type='text' name='mid' value='juna' />
+		<input type='text' name='mid' value='${vo.mid }' />
 		<br/>
 		
 		<label>제목</label>
-		<input type='text' name='subject' value='hi~' />
+		<input type='text' name='subject' value=${vo.subject } />
 		<br/>
 		
-		<textarea name='doc'></textarea>
+		<textarea name='doc'>${vo.doc }</textarea>
 		<br/>
 		
-		<label>암호</label>
-		<input type='password' name='pwd' />
-		<br/>
+		<div id='att_list' >
+			<c:forEach var='f' items="${vo.attList}">
+				<div  class='file_zone'>
+					<img src="./upload/${f.sysAtt }"  width='150px' height='180px'/>
+					<label  class='del_file_chk'>
+						<input type='checkbox' name='delFile' value='${f.sysAtt }'>삭제</label> 
+				</div>
+			</c:forEach>
+		</div>
+
+		<input type='hidden' name='pwd' />
+		<input type='hidden' name='nowPage' value='${param.nowPage }'/>		
+		<input type='hidden' name='findStr' value='${param.findStr }'/>		
+		<input type='hidden' name='serial' value='${param.serial }'/>
 
 	</form>
 	
 	<form name='frm_upload' id='frm_upload' method='post'>
 		<label>파일첨부</label>
-		<input type='file' id='attfile' multiple/>
+		<input type='file' name='attfile' id='attfile' multiple/>
 			
 		<div id='image_preview'>
 			<div id='attzone'></div>
@@ -44,17 +55,13 @@
 	</form>
 	
 	<div id='btn_zone'>
-			<input type='button' value='수정' id='btnUpdate'>
+		<input type='button' value='수정' id='btnUpdate'>
 		<input type='button' value='취소' id='btnSearch'>
-		<input type='hidden' name='nowPage' value='${param.nowPage }'/>		
-		<input type='hidden' name='findStr' value='${param.findStr }'/>		
-		<input type='hidden' name='serial' value='${param.serial }'/>
 	</div>
-		<input type='hidden' name='pwd'/>
 		
 	<div id='brdPasswordZone'>
 		<div id='textZone'>
-			<label>삭제하시려면 암호를 입력해 주세요</label><br/>
+			<label>수정하시려면 암호를 입력해 주세요</label><br/>
 			<input type='password' id='pwd' />
 			<input type='button' value='확인' id='btnUpdateR' />
 			<input type='button' value='취소' id='btnCancel' />
