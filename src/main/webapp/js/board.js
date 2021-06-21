@@ -27,20 +27,30 @@ brd.init = function(){
 	
 	$('#board #btnInsertR').on('click', function(){
 		var frm = $('#frm_upload')[0];
-		
 		var data = new FormData(frm);
+		
+		var frm2 = $('#frm_board')[0];
+		param = $(frm2).serialize();
 		
 		$.ajax({
 			type : 'POST',
 			url : 'fup.brd',
 			enctype : 'multipart/form-data',
 			data : data,
-			contentType : false,	//form 태그의 정보를 text가 아닌 bianary로 전달하라는 의미
-			processData : false,	//form 태그의 정보를 text가 아닌 bianary로 전달하라는 의미
+			contentType : false,	
+			processData : false,	
 			success : function(resp){
-				frm = $('#frm_board')[0];
-				param = $(frm).serialize();
-				$('#board').load('registerR.brd', param);
+				$.post('registerR.brd', param, function(data){
+					$('#board').html(data);
+				})
+				
+				//alert(resp);
+				//frm = $('#frm_board')[0];
+				//param = $(frm).serialize();
+				//$('#board').load('registerR.brd', param);
+			},
+			error : function(xhr, resp, status){
+				alert(resp + "," + status);
 			}
 		});
 		
@@ -49,7 +59,10 @@ brd.init = function(){
 	$('#board #btnModify').on('click', function(){
 		var frm = $('#frm_board')[0];
 		var param = $(frm).serialize();
-		$('#board').load('modify.brd', param);
+		
+		$.post('modify.brd', param, function(data){
+			$('#board').html(data);
+		})
 	})
 	
 	$('#board #btnUpdate').on('click', function(){
@@ -59,27 +72,28 @@ brd.init = function(){
 	})
 	
 	$('#board #btnUpdateR').on('click', function(){
-		var frm = $('#frm_board')[0];
-		var pwd = $('#brdPasswordZone #pwd').val();
-		frm.pwd.value = pwd;
-	
-		//내용입력폼과 파일 업로드폼이 분리되지 않아서...
-		if(frm.findStr.value=='') frm.findStr.value = ' ';
-		if(frm.serial.value=='') frm.serial.value = 0;
-		if(frm.nowPage.value=='') frm.nowPage.value = '1';
-		
+		var frm = $('#frm_upload')[0];
 		var data = new FormData(frm);
+		
+		var pwd = $('#brdPasswordZone #pwd').val();
+		var frm2 = $('#frm_board')[0];
+		frm2.pwd.value = pwd;
 		
 		$.ajax({
 			type    : 'POST',
-			url     : 'update.fup',
+			url     : 'fup.brd',
 			enctype : 'multipart/form-data',
 			data    : data,
 			contentType : false,
 			processData : false,
 			success : function(resp){
 				$('#brdPasswordZone').css({'display' : 'none'});
-				$('#border').load('modifyR.brd');  
+				
+				var param = $(frm2).serialize();
+				
+				$.post('modifyR.brd', param, function(data){
+					$('#board').html(data);  
+				})
 			}
 		});
 	});
@@ -98,31 +112,36 @@ brd.init = function(){
 	})
 	
 	$('#board #btnReplR').on('click', function(){
-		var frm = $('#frm_board')[0];
-		
+		var frm = $('#frm_upload')[0];
 		var data = new FormData(frm);
 		
 		$.ajax({
 			type    : 'POST',
-			url     : 'repl.fup',
+			url     : 'fup.brd',
 			enctype : 'multipart/form-data',
 			data    : data,
 			contentType : false,
 			processData : false,
 			success : function(resp){
-				$('#border').load('replR.brd');
+				var frm2 = $('#frm_board')[0];
+				var param = $(frm2).serialize();
+				
+				$.post('replR.brd',param, function(data){
+					$('board').html(data);
+				})
 			}
 		});
 		
 	});
 	
 	$('#btnDeleteR').on('click', function(){
+		var frm = $('#frm_board')[0];
 		var pwd = $('#brdPasswordZone #pwd').val();
-		var frm = $('#frm_frm')[0];
 		frm.pwd.value = pwd;		
-		var param = $('#frm_frm').serialize();
 		
-		$('#border').load(url + 'deleteR', param, function(){
+		var param = $(frm).serialize();
+		
+		$('#board').load('delete.brd', param, function(){
 			$('#brdPasswordZone').css({
 			'display' : 'none'
 			})
@@ -152,7 +171,9 @@ brd.view = function(serial){
 	var frm = $('#frm_board')[0];
 	frm.serial.value = serial;
 	var param = $(frm).serialize();
-	$('#board').load('view.brd', param);
+	$.post('view.brd', param, function(data){
+					$('#board').html(data);
+	})
 }
 
 
