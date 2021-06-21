@@ -36,6 +36,8 @@ public class BoardFileUploadController {
 						
 						String date = sdf.format(new Date());
 						
+						System.out.println("p에 담기는가?" + p.getSize());
+						
 						if(p.getSize()>0) {
 							p.write(saveDir + date + "-" + fileName);
 							p.delete();
