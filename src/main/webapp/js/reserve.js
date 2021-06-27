@@ -42,7 +42,12 @@ reserve.init = function(){
 		$('#reserveindex').load('other.reserve');		
 	})
 	
-	$('#reserve #btnSc').on('click', function(){
+	$('#reserve #btnReserve').on('click', function(){
+		var frm = $('#frm_reserve')[0];
+		var param = $(frm).serialize();
+		
+		
+		
 		alert('예약이 완료되었습니다. 조회화면으로 넘어갑니다.');
 		$('#reserveindex').load('sc.reserve');	
 	})

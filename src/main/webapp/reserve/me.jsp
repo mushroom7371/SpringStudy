@@ -64,7 +64,7 @@
 		
 		<label>의료기관 및 예약일시 선택</label>
 		<input type='button' id='' value='의료기관 찾기'/>
-		<input type='button' id='btnSc' value='예약'/>
+		<input type='button' id='btnReserve' value='예약'/>
 		<input type='button' value='취소' onclick='reserve.doReserve()'/>
 		<hr/>
 		
