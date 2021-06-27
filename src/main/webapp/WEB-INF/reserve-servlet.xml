@@ -16,30 +16,33 @@
 		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 		">
 		
-		<context:annotation-config/>
-		<aop:aspectj-autoproxy/>
-		
-<!-- 	
+	<context:annotation-config/>
+	<aop:aspectj-autoproxy/>
+	
+	<bean id='dao' class='reserve.ReserveDao'/>
+	<bean id='reserveCtrl' class='reserve.ReserveController'/>
+	
+	<bean id='viewResolver'
+			class='org.springframework.web.servlet.view.InternalResourceViewResolver'>
+			<property name='prefix' value='/reserve/'/>
+			<property name='suffix' value='.jsp'/>
+	
+	</bean>
+	
+	<!-- Gmail -->
 	  <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 	    <property name="host" value="smtp.gmail.com" />
 	    <property name="port" value="587" />
 	    <property name="username" value="wnsghk6670@gmail.com" />
-	    <property name="password" value="" />
+	    <property name="password" value="45a4586h!" />
 	    <property name="javaMailProperties">
 	    <props>
 	      <prop key="mail.smtp.auth">true</prop>
 	      <prop key="mail.smtp.starttls.enable">true</prop>
+	      <prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+			<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
 	    </props>
 	    </property>
 	  </bean>
-	  
-	  <bean id='mailCtrl' class='email.MailController'/>
-	  
-	  <bean id='viewResolver'
-			class='org.springframework.web.servlet.view.InternalResourceViewResolver'>
-			<property name='prefix' value='/email/'/>
-			<property name='suffix' value='.jsp'/>
-	
-	</bean>
-	 -->
+
 </beans>
