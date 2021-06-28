@@ -3,6 +3,8 @@
  */
 
 var reserve = {};
+var checkNumber;
+var tomail;
 
 reserve.doReserve = function(){
 	$('#reserveindex').load('doReserve.reserve');	
@@ -15,7 +17,7 @@ reserve.sc = function(){
 reserve.init = function(){
 	
 	//메일전송
-	$('#reserve #btnMailSend').on('click', function(){
+	$('#reserve #btnMailSend').unbind("click").bind('click', function(){
 		var frm = $('#frm_reserve')[0];
 		var param = $(frm).serialize();
 
@@ -26,12 +28,29 @@ reserve.init = function(){
 			dataType : "json",
 			success : function(resp) {
 				alert('메일이 전송되었습니다.');
-				alert(resp.chkNum)
+				
+				checkNumber = resp.chkNum;
+				tomail = resp.tomail;
+				
 			},
 			error : function(resp){
 				alert('메일 전송을 실패했습니다.');
 			}
 		});
+	})
+	
+	$('#reserve #btnChkNum').on('click', function(){
+		
+		var key = document.getElementById("key").value;
+		
+		if(key == checkNumber){
+			alert('인증되었습니다.')
+			self.close();
+			opener.document.getElementById("Email").value = document.getElementById("tomail").value;
+			
+		}else(
+			alert('인증번호를 다시 확인해 주세요.')
+		)
 	})
 	
 	$('#reserve #btnMeReserve').on('click', function(){
@@ -42,18 +61,27 @@ reserve.init = function(){
 		$('#reserveindex').load('other.reserve');		
 	})
 	
-	$('#reserve #btnReserve').on('click', function(){
+	$('#reserve #btnReserve').unbind("click").bind("click", function(){
 		var frm = $('#frm_reserve')[0];
 		var param = $(frm).serialize();
 		
+		$.ajax({
+			type    : 'POST',
+			url     : 'insert.reserve',
+			data    : param,
+			success : function(resp){
+				alert('예약이 완료되었습니다. 조회화면으로 넘어갑니다.');
+				$('#reserveindex').load('sc.reserve');	
+			}
+		});
 		
-		
-		alert('예약이 완료되었습니다. 조회화면으로 넘어갑니다.');
-		$('#reserveindex').load('sc.reserve');	
 	})
 	
 	$('#reserve #btnSearch').on('click', function(){
-		$('#reserveindex').load('search.reserve');		
+		var frm = $('#frm_reserve')[0];
+		var param = $(frm).serialize();
+		
+		$('#reserveindex').load('search.reserve', param);		
 	})
 	
 	$('#reserve #btnCancle').on('click', function(){

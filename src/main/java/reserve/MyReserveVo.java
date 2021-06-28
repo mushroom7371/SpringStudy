@@ -1,14 +1,14 @@
 package reserve;
 
 public class MyReserveVo {
-	String myName = "";
-	int myJumin;
-	int myPhone;
-	String Email = "";
-	String reserveVaccine = "";
-	String reserveTime = "";
-	String reserveCenter = "";
-	String reserveNum = "";
+	String myName ="";
+	String myJumin ="";
+	String myPhone ="";
+	String Email ="";
+	String reserveVaccine ="";
+	String reserveTime ="";
+	String reserveCenter ="";
+	Integer reserveNum = 0;
 	
 	public String getMyName() {
 		return myName;
@@ -16,16 +16,16 @@ public class MyReserveVo {
 	public void setMyName(String myName) {
 		this.myName = myName;
 	}
-	public int getMyJumin() {
+	public String getMyJumin() {
 		return myJumin;
 	}
-	public void setMyJumin(int myJumin) {
+	public void setMyJumin(String myJumin) {
 		this.myJumin = myJumin;
 	}
-	public int getMyPhone() {
+	public String getMyPhone() {
 		return myPhone;
 	}
-	public void setMyPhone(int myPhone) {
+	public void setMyPhone(String myPhone) {
 		this.myPhone = myPhone;
 	}
 	public String getEmail() {
@@ -52,10 +52,12 @@ public class MyReserveVo {
 	public void setReserveCenter(String reserveCenter) {
 		this.reserveCenter = reserveCenter;
 	}
-	public String getReserveNum() {
+	public Integer getReserveNum() {
 		return reserveNum;
 	}
-	public void setReserveNum(String reserveNum) {
+	public void setReserveNum(Integer reserveNum) {
 		this.reserveNum = reserveNum;
 	}
+	
+
 }

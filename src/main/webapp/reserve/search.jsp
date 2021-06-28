@@ -29,31 +29,31 @@
 		<h3>예약자 정보</h3>
 		<hr/>
 		<label>예약자 이름</label>
-		<input type='text'>
+		<input type='text' name='myName' value='${list.myName }'/>
 		<hr/>
 		<label>예약자 주민등록번호</label>
-		<input type='text'><span> - </span><input type='text'>
+		<input type='text' name='myJumin' value='${list.myJumin }'/>
 		<hr/>
 		
 		<h3>예약 정보</h3>
 		<label>예약 번호</label>
-		<input type='text'>
+		<input type='text' name='reserveNum' value='${list.reserveNum }'/>
 		<hr/>
 		<label>접종 받는 분 이름</label>
-		<input type='text'>
+		<input type='text' name='myName' value='${list.myName }'/>
 		<hr/>
 		<label>접종 받는 분 주민등록번호</label>
-		<input type='text'><span> - </span><input type='text'>
+		<input type='text' name='myJumin' value='${list.myJumin }'>
 		<hr/>
 		<label>예약 백신</label>
-		<input type='text'>
+		<input type='text' name='reserveVaccine' value='${list.reserveVaccine }'/>
 		<hr/>
 		<label>예약 의료기관</label>
-		<input type='text'>
+		<input type='text' name='reserveCenter' value='${list.reserveCenter }'/>
 		<input type='button' value='의료기관 정보 확인'/>
 		<hr/>
 		<label>접종 일시</label>
-		<input type='text'>
+		<input type='text' name='reserveTime' value='${list.reserveTime }'/>
 		<hr/>
 		<input type='button' id='btnCancle' value='예약 취소'/>
 		<input type='button' value='홈으로'/>

@@ -1,5 +1,6 @@
 package reserve;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -76,9 +77,10 @@ public class ReserveController {
 			e.printStackTrace();
 			System.out.println(e);
 		}
-		 System.out.println(chkNum);
 		 json.addProperty("chkNum", chkNum);
+		 json.addProperty("tomail", tomail);
 		 System.out.println(json.get("chkNum"));
+		 System.out.println(json.get("tomail"));
 		 String result = json.toString();
 		 System.out.println(result);
 		 
@@ -113,19 +115,44 @@ public class ReserveController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/sc.reserve", method= {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value="sc.reserve", method= {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView sc() {
 		ModelAndView mv = new ModelAndView();
 		
 		mv.setViewName("sc");
+
+		return mv;
+	}
+	
+	@RequestMapping(value="/insert.reserve", method= {RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView register(MyReserveVo vo, HttpServletRequest req, HttpServletResponse resp) {
+		ModelAndView mv = new ModelAndView();
+		
+		try {
+			req.setCharacterEncoding("utf-8");
+			resp.setContentType("text/html;charset=utf-8");
+			System.out.println("Controller.register....");
+			
+			dao.insert(vo);
+			mv.setViewName("sc");
+			
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
 		
 		return mv;
 	}
 	
 	@RequestMapping(value="/search.reserve", method= {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView search() {
+	public ModelAndView search(MyReserveVo vo) {
 		ModelAndView mv = new ModelAndView();
 		
+		System.out.println("Controller.search............");
+		
+		MyReserveVo vo2 = dao.select(vo);
+		
+		
+		mv.addObject("list", vo2);
 		mv.setViewName("search");
 		
 		return mv;

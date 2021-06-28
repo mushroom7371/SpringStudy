@@ -5,9 +5,17 @@
 	
 <mapper namespace="reserve">
 	<!-- 입력 -->
-	<insert id="reserve_insert" parameterType="reserve.MyReserveVo">
+	<insert id="reserve_myinsert" parameterType="reserve.MyReserveVo">
 			INSERT INTO MyReserve(myName, myJumin, myPhone, Email, reserveVaccine, reserveTime, reserveCenter, reserveNum )
-			values(#{myName}, #{myJumin} , #{myPhone}, #{Email}, #{reserveVaccine},  #{reserveTime},  #{reserveCenter},  #{reserveNum})		
+			values(#{myName}, #{myJumin} , #{myPhone}, #{Email}, #{reserveVaccine},  #{reserveTime},  #{reserveCenter},  seq_reserveNum.nextVal)		
 	</insert>
+	
+	<select id="reserve_search" parameterType="reserve.MyReserveVo" resultType="reserve.MyReserveVo">
+			select * from MyReserve where myJumin = #{myJumin}
+	</select>
+	
+	<select id="reserve_getReserveNum" resultType="Integer">
+			select seq_board.nextval from dual
+	</select>
 	
 </mapper>

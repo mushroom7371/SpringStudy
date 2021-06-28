@@ -37,11 +37,11 @@
 		<hr/>
 		
 		<label>이름</label>
-		<input type='text'>
+		<input type='text' name='myName'>
 		<hr/>
 		
 		<label>주민등록번호</label>
-		<input type='text'><span> - </span><input type='text'>
+		<input type='text' name='myJumin'>
 		<hr/>
 		
 		<label>본인인증</label>
@@ -53,11 +53,11 @@
 		<hr/>
 		
 		<label>예약 백신</label>
-		<input type='text'>
+		<input type='text' name='reserveVaccine'>
 		<hr/>
 		
 		<label>휴대폰 번호</label>
-		<input type='text'><input type='text'><input type='text'>
+		<input type='text' name='myPhone'>
 		<br/>
 		<span>* 본인 명의의 휴대폰이 아닌경우 온라인 예약이 불가능합니다.</span>
 		<hr/>
@@ -67,8 +67,10 @@
 		<input type='button' id='btnReserve' value='예약'/>
 		<input type='button' value='취소' onclick='reserve.doReserve()'/>
 		<hr/>
-		
-		<input type='hidden' id='authentication' value=''>
+
+		<input type='hidden' name='reserveTime' id='reserveTime'/>
+		<input type='hidden' name='reserveCenter' id='reserveCenter'/>
+		<input type='text' name='Email' id='Email'/>
 		
 	</form>
 </div>

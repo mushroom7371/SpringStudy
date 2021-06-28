@@ -28,8 +28,6 @@
 		<input type='text' name='key' id='key'>
 		<input type='button' id='btnChkNum' value='인증번호 확인'/>
 		
-		<input type='text' name='chkKey' id='chkKey'/>
-		
 	</form>
 </div>
 <script>
