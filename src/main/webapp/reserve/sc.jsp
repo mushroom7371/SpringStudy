@@ -27,15 +27,15 @@
 		<br/>
 		
 		<label>접종 받는 분 이름</label>
-		<input type='text' name='myName'/>
+		<input type='text' name='myName' id='myName'/>
 		<hr/>
 		
 		<label>접종 받는 분 주민등록번호</label>
-		<input type='text' name='myJumin'/>
+		<input type='text' name='myJumin' id='myJumin'/>
 		<hr/>
 		
 		<label>예약 번호</label>
-		<input type='text' name='reserveNum'/>
+		<input type='text' name='reserveNum' id='reserveNum'/>
 
 		<input type='button' id='btnSearch' value='조회하기'/>
 		<input type='button' value='취소' onclick='reserve.doReserve()'/>

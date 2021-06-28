@@ -81,7 +81,26 @@ reserve.init = function(){
 		var frm = $('#frm_reserve')[0];
 		var param = $(frm).serialize();
 		
-		$('#reserveindex').load('search.reserve', param);		
+		if(document.getElementById("myName").value == "" || document.getElementById("myJumin").value == "" || document.getElementById("reserveNum").value == ""){
+			alert('예약정보를 모두 입력해 주세요.')
+		
+		}else{
+			$.ajax({
+				type    : 'POST',
+				url     : 'search.reserve',
+				data    : param,
+				success : function(resp){
+					alert('조회 화면으로 이동합니다.');
+					$('#reserveindex').load('search.reserve');
+				},
+				
+				error : function(xhr, resp, status){
+				alert('입력하신 정보를 조회 할 수 없습니다.');
+				}
+			});
+
+		}
+
 	})
 	
 	$('#reserve #btnCancle').on('click', function(){
