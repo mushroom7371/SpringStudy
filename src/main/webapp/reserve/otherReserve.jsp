@@ -37,11 +37,11 @@
 		<hr/>
 		
 		<label>대리 예약자 이름</label>
-		<input type='text'>
+		<input type='text' name='otherName'/>
 		<hr/>
 		
 		<label>대리 예약자 주민등록번호</label>
-		<input type='text'><span> - </span><input type='text'>
+		<input type='text' name='otherJumin'/>
 		<hr/>
 		
 		<label>대리 예약자 본인인증</label>
@@ -49,25 +49,33 @@
 		<input type='button' class='btn' id='btnEmail' value='e-mail 인증' onclick="emailPopup();"/>
 		<br/>
 		<label></label>
-		<input type='text' value='본인 인증을 완료하여 주세요'/>
+		<input type='text' id='reserveOk' name='reserveOk' value='인증을 완료하여 주세요' readonly/>
 		<hr/>
 		
 		<label>대리 예약자 휴대폰 번호</label>
-		<input type='text'><input type='text'><input type='text'>
+		<input type='text' name='otherPhone'/>
 		<br/>
 		<span>* 본인 명의의 휴대폰이 아닌경우 온라인 예약이 불가능합니다.</span>
 		<hr/>
 		
 		<label>접종 받는 분 이름</label>
-		<input type='text'>
+		<input type='text' name='myName'/>
+		<hr/>
+		
+		<label>접종 받는 분 전화번호</label>
+		<input type='text' name='myPhone'/>
 		<hr/>
 		
 		<label>접종 받는 분 주민등록번호</label>
-		<input type='text'><span> - </span><input type='text'>
+		<input type='text' name='myJumin'/>
 		<hr/>
 		
 		<label>예약 백신</label>
-		<input type='text'>
+		<input type='text' name='reserveVaccine'/>
+		<hr/>
+		
+		<label>정보 수신 이메일</label>
+		<input type='text' name='Email' id='Email'/>
 		<hr/>
 		
 		<label>의료기관 및 예약일시 선택</label>
@@ -76,7 +84,9 @@
 		<input type='button' value='취소' onclick='reserve.doReserve()'/>
 		<hr/>
 		
-		<input type='hidden' id='authentication' value=''>
+		<input type='hidden' name='reserveTime' id='reserveTime'/>
+		<input type='hidden' name='reserveCenter' id='reserveCenter'/>
+		
 	</form>
 </div>
 <script>

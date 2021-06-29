@@ -1,6 +1,5 @@
 package reserve;
 
-import java.util.List;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -97,11 +96,11 @@ public class ReserveController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/me.reserve", method= {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value="/my.reserve", method= {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView me() {
 		ModelAndView mv = new ModelAndView();
 		
-		mv.setViewName("me");
+		mv.setViewName("myReserve");
 
 		return mv;
 	}
@@ -110,7 +109,7 @@ public class ReserveController {
 	public ModelAndView other() {
 		ModelAndView mv = new ModelAndView();
 		
-		mv.setViewName("other");
+		mv.setViewName("otherReserve");
 
 		return mv;
 	}
@@ -119,7 +118,7 @@ public class ReserveController {
 	public ModelAndView sc() {
 		ModelAndView mv = new ModelAndView();
 		
-		mv.setViewName("sc");
+		mv.setViewName("reserveSearchAndCancle");
 
 		return mv;
 	}
@@ -134,7 +133,7 @@ public class ReserveController {
 			System.out.println("Controller.register....");
 			
 			dao.insert(vo);
-			mv.setViewName("sc");
+			mv.setViewName("reserveSearchAndCancle");
 			
 		}catch(Exception ex) {
 			ex.printStackTrace();
@@ -150,19 +149,32 @@ public class ReserveController {
 		System.out.println("Controller.search............");
 		
 		MyReserveVo vo2 = dao.select(vo);
-		
+		String jumin = vo2.getMyJumin();
 		
 		mv.addObject("list", vo2);
-		mv.setViewName("search");
+		mv.addObject("jumin",jumin);
+		mv.setViewName("reserveSearch");
 		
 		return mv;
 	}
 	
-	@RequestMapping(value="/cancle.reserve", method= {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView cancle() {
+	@RequestMapping(value="canclePage.reserve", method= {RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView canclePage() {
 		ModelAndView mv = new ModelAndView();
 		
-		mv.setViewName("cancle");
+		mv.setViewName("reserveCancle");
+
+		return mv;
+	}
+	
+	@RequestMapping(value="/cancle.reserve", method= {RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView cancle(MyReserveVo v) {
+		ModelAndView mv = new ModelAndView();
+		
+		MyReserveVo vo = dao.select(v);		
+		dao.delete(vo);
+		
+		mv.setViewName("reserveSearchAndCancle");
 		
 		return mv;
 	}

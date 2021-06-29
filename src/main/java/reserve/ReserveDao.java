@@ -1,14 +1,7 @@
 package reserve;
 
-import java.io.File;
-import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
 
-import board.BoardAttVo;
-import board.BoardFileUploadController;
-import board.BoardVo;
-import board.Page;
 import mybatis.MybaFactory;
 
 public class ReserveDao {
@@ -63,6 +56,33 @@ SqlSession sqlSession;
 
 		return msg;
 	}
+	
+	public String delete(MyReserveVo v) {
+		String msg = "OK";
+
+		try {
+
+			int r = sqlSession.delete("reserve.reserve_delete", v);
+			System.out.println("삭제 테스트 " + r);
+			sqlSession.commit();
+			
+			if(r>0) {
+				
+				System.out.println("정상적으로 삭제됨");
+				
+				}else {
+					throw new Exception();
+				}
+			
+		}catch(Exception ex) {
+			sqlSession.rollback();
+			ex.printStackTrace();
+			msg = ex.toString();
+		}
+		return msg;
+	}
+	
+	
 }
 
 

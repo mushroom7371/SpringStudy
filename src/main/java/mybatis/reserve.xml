@@ -10,12 +10,14 @@
 			values(#{myName}, #{myJumin} , #{myPhone}, #{Email}, #{reserveVaccine},  #{reserveTime},  #{reserveCenter},  seq_reserveNum.nextVal)		
 	</insert>
 	
+	<!-- 조회 -->
 	<select id="reserve_search" parameterType="reserve.MyReserveVo" resultType="reserve.MyReserveVo">
 			select * from MyReserve where myJumin = #{myJumin}
 	</select>
 	
-	<select id="reserve_getReserveNum" resultType="Integer">
-			select seq_board.nextval from dual
-	</select>
+	<!-- 삭제 -->
+	<delete id="reserve_delete" parameterType="reserve.MyReserveVo">
+			DELETE FROM MyReserve WHERE myJumin = #{myJumin}
+	</delete>
 	
 </mapper>

@@ -47,14 +47,15 @@ reserve.init = function(){
 			alert('인증되었습니다.')
 			self.close();
 			opener.document.getElementById("Email").value = document.getElementById("tomail").value;
+			opener.document.getElementById("reserveOk").value = "인증되었습니다";
 			
 		}else(
 			alert('인증번호를 다시 확인해 주세요.')
 		)
 	})
 	
-	$('#reserve #btnMeReserve').on('click', function(){
-		$('#reserveindex').load('me.reserve');		
+	$('#reserve #btnMyReserve').on('click', function(){
+		$('#reserveindex').load('my.reserve');		
 	})
 	
 	$('#reserve #btnOtherReserve').on('click', function(){
@@ -65,16 +66,19 @@ reserve.init = function(){
 		var frm = $('#frm_reserve')[0];
 		var param = $(frm).serialize();
 		
-		$.ajax({
-			type    : 'POST',
-			url     : 'insert.reserve',
-			data    : param,
-			success : function(resp){
-				alert('예약이 완료되었습니다. 조회화면으로 넘어갑니다.');
-				$('#reserveindex').load('sc.reserve');	
-			}
-		});
-		
+		if(document.getElementById("reserveOk").value != "인증되었습니다"){
+			alert('인증을 완료하여 주세요.')
+		}else{
+			$.ajax({
+				type    : 'POST',
+				url     : 'insert.reserve',
+				data    : param,
+				success : function(resp){
+					alert('예약이 완료되었습니다. 조회화면으로 넘어갑니다.');
+					$('#reserveindex').load('sc.reserve');	
+				}
+			});	
+		}
 	})
 	
 	$('#reserve #btnSearch').on('click', function(){
@@ -90,8 +94,10 @@ reserve.init = function(){
 				url     : 'search.reserve',
 				data    : param,
 				success : function(resp){
-					alert('조회 화면으로 이동합니다.');
-					$('#reserveindex').load('search.reserve');
+					if(resp.jumin == null){
+						alert('조회 화면으로 이동합니다.');
+						$('#reserveindex').load('search.reserve', param);
+					}
 				},
 				
 				error : function(xhr, resp, status){
@@ -104,12 +110,28 @@ reserve.init = function(){
 	})
 	
 	$('#reserve #btnCancle').on('click', function(){
-		$('#reserveindex').load('cancle.reserve');		
+		$('#reserveindex').load('canclePage.reserve');		
 	})
 	
 	$('#reserve #btnCancleR').on('click', function(){
-		alert('예약이 취소되었습니다. 예약페이지로 넘어갑니다')
-		$('#reserveindex').load('doReserve.reserve');		
+		var frm = $('#frm_reserve')[0];
+		var param = $(frm).serialize();
+		
+		$.ajax({
+				type    : 'POST',
+				url     : 'cancle.reserve',
+				data    : param,
+				success : function(resp){
+					if(resp.jumin == null){
+						alert('예약이 취소되었습니다. 조회 화면으로 이동합니다.');
+						$('#reserveindex').load('sc.reserve');
+					}
+				},
+				
+				error : function(xhr, resp, status){
+				alert('입력하신 정보를 삭제 할 수 없습니다.');
+				}
+			});
 	})
 	
 	$('#reserve #btnSend').on('click', function(){

@@ -49,7 +49,7 @@
 		<input type='button' class='btn' id='btnEmail' value='e-mail 인증' onclick="emailPopup();"/>
 		<br/>
 		<label></label>
-		<input type='text' value='본인 인증을 완료하여 주세요'/>
+		<input type='text' id='reserveOk' name='reserveOk' value='인증을 완료하여 주세요' readonly/>
 		<hr/>
 		
 		<label>예약 백신</label>
@@ -62,6 +62,10 @@
 		<span>* 본인 명의의 휴대폰이 아닌경우 온라인 예약이 불가능합니다.</span>
 		<hr/>
 		
+		<label>정보 수신 이메일</label>
+		<input type='text' name='Email' id='Email'/>
+		<hr/>
+		
 		<label>의료기관 및 예약일시 선택</label>
 		<input type='button' id='' value='의료기관 찾기'/>
 		<input type='button' id='btnReserve' value='예약'/>
@@ -70,7 +74,7 @@
 
 		<input type='hidden' name='reserveTime' id='reserveTime'/>
 		<input type='hidden' name='reserveCenter' id='reserveCenter'/>
-		<input type='text' name='Email' id='Email'/>
+		<input type='hidden' name='Email' id='Email'/>
 		
 	</form>
 </div>
