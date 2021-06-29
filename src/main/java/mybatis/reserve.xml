@@ -10,8 +10,17 @@
 			values(#{myName}, #{myJumin} , #{myPhone}, #{Email}, #{reserveVaccine},  #{reserveTime},  #{reserveCenter},  seq_reserveNum.nextVal)		
 	</insert>
 	
+	<insert id="reserve_otherinsert" parameterType="reserve.OtherReserveVo">
+			INSERT INTO OtherReserve(otherName, otherJumin, otherPhone, myPhone)
+			values(#{otherName}, #{otherJumin} , #{otherPhone}, #{myPhone})
+	</insert>
+	
 	<!-- 조회 -->
 	<select id="reserve_search" parameterType="reserve.MyReserveVo" resultType="reserve.MyReserveVo">
+			select * from MyReserve where myJumin = #{myJumin}
+	</select>
+	
+	<select id="reserve_allSearch" parameterType="reserve.AllReserveVo" resultType="reserve.AllReserveVo">
 			select * from MyReserve where myJumin = #{myJumin}
 	</select>
 	

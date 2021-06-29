@@ -81,6 +81,34 @@ reserve.init = function(){
 		}
 	})
 	
+	$('#reserve #btnReserveOther').unbind("click").bind("click", function(){
+		var frm = $('#frm_reserve')[0];
+		var param = $(frm).serialize();
+		
+		var frm2 = $('#frm_otherReserve')[0];
+		var phone = document.getElementById("myPhone").value;
+
+		var param2 = $(frm2).serialize();
+		var param3 = param2+"&myPhone="+phone
+
+		if(document.getElementById("reserveOk").value != "인증되었습니다"){
+			alert('인증을 완료하여 주세요.')
+		}else{
+			$.ajax({
+				type    : 'POST',
+				url     : 'insert.reserve',
+				data    : param,
+				success : function(resp){
+					$.post('otherInsert.reserve', param3, function(data){
+					$('#reserveindex').html(data);
+					
+					alert('예약이 완료되었습니다. 조회화면으로 넘어갑니다.');
+				})
+				}
+			});	
+		}
+	})
+	
 	$('#reserve #btnSearch').on('click', function(){
 		var frm = $('#frm_reserve')[0];
 		var param = $(frm).serialize();

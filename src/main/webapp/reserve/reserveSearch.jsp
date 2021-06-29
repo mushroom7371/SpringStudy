@@ -29,10 +29,10 @@
 		<h3>예약자 정보</h3>
 		<hr/>
 		<label>예약자 이름</label>
-		<input type='text' name='myName' value='${list.myName }'/>
+		<input type='text' name='Name' value='${list.myName }'/>
 		<hr/>
 		<label>예약자 주민등록번호</label>
-		<input type='text' name='myJumin' value='${list.myJumin }'/>
+		<input type='text' name='Jumin' value='${list.myJumin }'/>
 		<hr/>
 		
 		<h3>예약 정보</h3>

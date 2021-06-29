@@ -1,15 +1,14 @@
 package reserve;
 
 public class OtherReserveVo {
-	int myPhone;
+	String myPhone = "";
 	String otherName = "";
-	int otherJumin;
-	int otherPhone;
-	
-	public int getMyPhone() {
+	String otherJumin = "";
+	String otherPhone = "";
+	public String getMyPhone() {
 		return myPhone;
 	}
-	public void setMyPhone(int myPhone) {
+	public void setMyPhone(String myPhone) {
 		this.myPhone = myPhone;
 	}
 	public String getOtherName() {
@@ -18,16 +17,16 @@ public class OtherReserveVo {
 	public void setOtherName(String otherName) {
 		this.otherName = otherName;
 	}
-	public int getOtherJumin() {
+	public String getOtherJumin() {
 		return otherJumin;
 	}
-	public void setOtherJumin(int otherJumin) {
+	public void setOtherJumin(String otherJumin) {
 		this.otherJumin = otherJumin;
 	}
-	public int getOtherPhone() {
+	public String getOtherPhone() {
 		return otherPhone;
 	}
-	public void setOtherPhone(int otherPhone) {
+	public void setOtherPhone(String otherPhone) {
 		this.otherPhone = otherPhone;
 	}
 

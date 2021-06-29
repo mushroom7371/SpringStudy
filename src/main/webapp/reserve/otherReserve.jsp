@@ -22,7 +22,7 @@
 <body>
 <h2>대리 예약하기</h2>
 <div id='reserve'>
-	<form name='frm_reserve' id='frm_reserve' method='post' action=''>
+	<form name='frm_otherReserve' id='frm_otherReserve' method='post' action=''>
 		<div>
 			<div>1단계 | 예약정보 입력</div>
 			<div>2단계 | 예약완료 안내</div>
@@ -58,12 +58,16 @@
 		<span>* 본인 명의의 휴대폰이 아닌경우 온라인 예약이 불가능합니다.</span>
 		<hr/>
 		
+	</form>
+		
+	<form name='frm_reserve' id='frm_reserve' method='post' action=''>
+		
 		<label>접종 받는 분 이름</label>
 		<input type='text' name='myName'/>
 		<hr/>
 		
 		<label>접종 받는 분 전화번호</label>
-		<input type='text' name='myPhone'/>
+		<input type='text' id='myPhone' name='myPhone'/>
 		<hr/>
 		
 		<label>접종 받는 분 주민등록번호</label>
@@ -80,7 +84,7 @@
 		
 		<label>의료기관 및 예약일시 선택</label>
 		<input type='button' value='의료기관 찾기'/>
-		<input type='button' id='btnSc' value='예약'/>
+		<input type='button' id='btnReserveOther' value='예약'/>
 		<input type='button' value='취소' onclick='reserve.doReserve()'/>
 		<hr/>
 		

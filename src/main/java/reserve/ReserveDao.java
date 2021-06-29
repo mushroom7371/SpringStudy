@@ -21,7 +21,7 @@ SqlSession sqlSession;
 		}
 	}
 	
-	public MyReserveVo select(MyReserveVo vo){
+	public MyReserveVo Select(MyReserveVo vo){
 		MyReserveVo vo2 = null;
 		
 		try {
@@ -35,6 +35,20 @@ SqlSession sqlSession;
 		return vo2;
 	}
 	
+	public AllReserveVo allSelect(AllReserveVo vo){
+		AllReserveVo vo2 = null;
+		
+		try {
+			
+			vo2 = sqlSession.selectOne("reserve_allSearch", vo);
+			
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return vo2;
+	}
+
 	public String insert(MyReserveVo vo) {
 		String msg = "OK";
 		int r = 0;
@@ -54,6 +68,28 @@ SqlSession sqlSession;
 
 		}
 
+		return msg;
+	}
+	
+	public String insertO(OtherReserveVo vo) {
+		String msg = "OK";
+		int r = 0;
+		
+		try {
+			r = sqlSession.insert("reserve.reserve_otherinsert", vo);
+			System.out.println("vo size : " + r);
+			if(r>0) {
+				sqlSession.commit();
+			}else {
+				throw new Exception();
+			}
+		}catch(Exception ex) {
+			msg = ex.toString();
+			ex.printStackTrace();
+			sqlSession.rollback();
+			
+		}
+		
 		return msg;
 	}
 	

@@ -126,6 +126,9 @@ public class ReserveController {
 	@RequestMapping(value="/insert.reserve", method= {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView register(MyReserveVo vo, HttpServletRequest req, HttpServletResponse resp) {
 		ModelAndView mv = new ModelAndView();
+//		JsonObject json = new JsonObject();
+//		
+//		String myPhone = req.getParameter("myPhone");
 		
 		try {
 			req.setCharacterEncoding("utf-8");
@@ -133,12 +136,33 @@ public class ReserveController {
 			System.out.println("Controller.register....");
 			
 			dao.insert(vo);
+			
 			mv.setViewName("reserveSearchAndCancle");
 			
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}
 		
+//		json.addProperty("myPhone", myPhone);
+		return mv;
+	}
+	
+	@RequestMapping(value="/otherInsert.reserve", method= {RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView registerO(OtherReserveVo vo, HttpServletRequest req, HttpServletResponse resp) {
+		ModelAndView mv = new ModelAndView();
+		System.out.println("tettxtsate : " + vo.getMyPhone());
+		try {
+			req.setCharacterEncoding("utf-8");
+			resp.setContentType("text/html;charset=utf-8");
+			System.out.println("Controller.registerR....");
+			
+			dao.insertO(vo);
+			
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		mv.setViewName("reserveSearchAndCancle");
 		return mv;
 	}
 	
@@ -148,10 +172,28 @@ public class ReserveController {
 		
 		System.out.println("Controller.search............");
 		
-		MyReserveVo vo2 = dao.select(vo);
+		MyReserveVo vo2 = dao.Select(vo);
 		String jumin = vo2.getMyJumin();
 		
 		mv.addObject("list", vo2);
+		
+		mv.addObject("jumin",jumin);
+		mv.setViewName("reserveSearch");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value="/search.reserve", method= {RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView searchAll(AllReserveVo vo) {
+		ModelAndView mv = new ModelAndView();
+		
+		System.out.println("Controller.search............");
+		
+		MyReserveVo vo2 = dao.allSelect(vo);
+		String jumin = vo2.getMyJumin();
+		
+		mv.addObject("list", vo2);
+		
 		mv.addObject("jumin",jumin);
 		mv.setViewName("reserveSearch");
 		
@@ -171,7 +213,7 @@ public class ReserveController {
 	public ModelAndView cancle(MyReserveVo v) {
 		ModelAndView mv = new ModelAndView();
 		
-		MyReserveVo vo = dao.select(v);		
+		MyReserveVo vo = dao.Select(v);		
 		dao.delete(vo);
 		
 		mv.setViewName("reserveSearchAndCancle");
