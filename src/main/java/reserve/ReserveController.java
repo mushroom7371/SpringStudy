@@ -200,11 +200,18 @@ public class ReserveController {
 	}
 	
 	@RequestMapping(value="/cancle.reserve", method= {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView cancle(MyReserveVo v) {
+	public ModelAndView cancle(MyReserveVo vo, OtherReserveVo v) {
 		ModelAndView mv = new ModelAndView();
 		
-		MyReserveVo vo = dao.select(v);		
-		dao.delete(vo);
+		MyReserveVo vo2 = dao.select(vo);
+		OtherReserveVo v2 = dao.otherSelect(v);
+		
+		if(v2.getOtherName().equals("")) {
+			dao.delete(vo2);	
+		}else {
+			dao.otherDelete(v2);
+			dao.delete(vo2);
+		}
 		
 		mv.setViewName("reserveSearchAndCancle");
 		

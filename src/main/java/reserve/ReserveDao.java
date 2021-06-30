@@ -96,12 +96,12 @@ SqlSession sqlSession;
 		return msg;
 	}
 	
-	public String delete(MyReserveVo v) {
+	public String delete(MyReserveVo vo) {
 		String msg = "OK";
 
 		try {
 
-			int r = sqlSession.delete("reserve.reserve_delete", v);
+			int r = sqlSession.delete("reserve.reserve_delete", vo);
 			System.out.println("삭제 테스트 " + r);
 			sqlSession.commit();
 			
@@ -121,6 +121,28 @@ SqlSession sqlSession;
 		return msg;
 	}
 	
+	public String otherDelete(OtherReserveVo v) {
+		String msg = "OK";
+		
+		try {
+			
+			int r = sqlSession.delete("reserve.reserve_otherDelete", v);
+			System.out.println("삭제 테스트 " + r);
+			sqlSession.commit();
+			
+			if(r>0) {
+				System.out.println("정상적으로 삭제됨");
+			}else {
+				throw new Exception();
+			}
+			
+		}catch(Exception ex) {
+			sqlSession.rollback();
+			ex.printStackTrace();
+			msg = ex.toString();
+		}
+		return msg;
+	}
 	
 }
 

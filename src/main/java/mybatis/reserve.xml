@@ -30,7 +30,11 @@
 	
 	<!-- 삭제 -->
 	<delete id="reserve_delete" parameterType="reserve.MyReserveVo">
-			DELETE FROM MyReserve WHERE myJumin = #{myJumin}
+			DELETE FROM MyReserve WHERE myPhone = #{myPhone}
+	</delete>
+	
+	<delete id="reserve_otherDelete" parameterType="reserve.OtherReserveVo">
+			DELETE FROM OtherReserve WHERE myPhone = #{myPhone}
 	</delete>
 	
 </mapper>

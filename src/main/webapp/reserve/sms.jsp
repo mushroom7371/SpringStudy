@@ -21,12 +21,12 @@
 	<form name='frm_reserve' id='frm_reserve' method='post' action=''>
 		<h2>SMS 문자인증 페이지입니다.</h2>
 		<label>휴대폰 번호</label>
-		<input type='text'>
-		<input type='button' value='인증번호 발송'/>
+		<input type='text' name='toPhone' id='toPhone'>
+		<input type='button' id='btnSmsSend' value='인증번호 발송'/>
 		<br>
 		<label>인증 번호</label>
 		<input type='text'>
-		<input type='button' value='인증번호 확인'/>
+		<input type='button' id='btnChkNum' value='인증번호 확인'/>
 	</form>
 </div>
 </body>

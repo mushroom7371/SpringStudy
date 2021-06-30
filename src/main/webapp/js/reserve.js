@@ -16,6 +16,11 @@ reserve.sc = function(){
 
 reserve.init = function(){
 	
+	//문자전송	
+	$('#reserve #btnSmsSend').on('click', function(){
+		$('#reserveindex').load('??');		
+	})
+	
 	//메일전송
 	$('#reserve #btnMailSend').unbind("click").bind('click', function(){
 		var frm = $('#frm_reserve')[0];
@@ -66,19 +71,37 @@ reserve.init = function(){
 		var frm = $('#frm_reserve')[0];
 		var param = $(frm).serialize();
 		
-		if(document.getElementById("reserveOk").value != "인증되었습니다"){
-			alert('인증을 완료하여 주세요.')
+		if($('#myName').val() == ''){
+			alert('접종 대상자 이름을 입력하세요.');
+			return;
+		}else if($('#myJumin').val() == ''){
+			alert('접종 대상자 주민번호를 입력하세요');
+			return;
+		}else if($('#reserveVaccine').val() == ''){
+			alert('접종하실 백신을 입력하세요');
+			return;
+		}else if($('#myPhone').val() == ''){
+			alert('접종 대상자 휴대폰 번호를 입력하세요');
+			return;
+		}else if($('#Email').val() == ''){
+			alert('이메일을 입력하세요');
+			return;
 		}else{
-			$.ajax({
-				type    : 'POST',
-				url     : 'insert.reserve',
-				data    : param,
-				success : function(resp){
-					alert('예약이 완료되었습니다. 조회화면으로 넘어갑니다.');
-					$('#reserveindex').load('sc.reserve');	
-				}
-			});	
-		}
+			if(document.getElementById("reserveOk").value != "인증되었습니다"){
+				alert('인증을 완료하여 주세요.')
+			}else{
+				$.ajax({
+					type    : 'POST',
+					url     : 'insert.reserve',
+					data    : param,
+					success : function(resp){
+						alert('예약이 완료되었습니다. 조회화면으로 넘어갑니다.');
+						$('#reserveindex').load('sc.reserve');	
+					}
+				});	
+			}
+		}		
+		
 	})
 	
 	$('#reserve #btnReserveOther').unbind("click").bind("click", function(){
@@ -90,22 +113,48 @@ reserve.init = function(){
 
 		var param2 = $(frm2).serialize();
 		var param3 = param2+"&myPhone="+phone
-
-		if(document.getElementById("reserveOk").value != "인증되었습니다"){
-			alert('인증을 완료하여 주세요.')
+		
+		if($('#otherName').val() == ''){
+			alert('대리예약자 이름을 입력하세요.');
+			return;
+		}else if($('#otherJumin').val() == ''){
+			alert('대리예약자 주민번호를 입력하세요');
+			return;
+		}else if($('#otherPhone').val() == ''){
+			alert('대리예약자 휴대폰 번호를 입력하세요');
+			return;
+		}else if($('#myName').val() == ''){
+			alert('접종 대상자 이름을 입력하세요');
+			return;
+		}else if($('#myPhone').val() == ''){
+			alert('접종 대상자 휴대폰 번호를 입력하세요');
+			return;
+		}else if($('#myJumin').val() == ''){
+			alert('접종 대상자 주민번호를 입력하세요');
+			return;
+		}else if($('#reserveVaccine').val() == ''){
+			alert('접종하실 백신을 입력하세요');
+			return;
+		}else if($('#Email').val() == ''){
+			alert('이메일을 입력하세요');
+			return;
 		}else{
-			$.ajax({
-				type    : 'POST',
-				url     : 'insert.reserve',
-				data    : param,
-				success : function(resp){
-					$.post('otherInsert.reserve', param3, function(data){
-					$('#reserveindex').html(data);
-					
-					alert('예약이 완료되었습니다. 조회화면으로 넘어갑니다.');
-				})
-				}
-			});	
+			if(document.getElementById("reserveOk").value != "인증되었습니다"){
+				alert('인증을 완료하여 주세요.')
+			}else{
+				$.ajax({
+					type    : 'POST',
+					url     : 'insert.reserve',
+					data    : param,
+					success : function(resp){
+						$.post('otherInsert.reserve', param3, function(data){
+						$('#reserveindex').html(data);
+						
+						alert('예약이 완료되었습니다. 조회화면으로 넘어갑니다.');
+					})
+					}
+				});	
+			}
 		}
 	})
 	
@@ -150,20 +199,14 @@ reserve.init = function(){
 				url     : 'cancle.reserve',
 				data    : param,
 				success : function(resp){
-					if(resp.jumin == null){
 						alert('예약이 취소되었습니다. 조회 화면으로 이동합니다.');
 						$('#reserveindex').load('sc.reserve');
-					}
 				},
 				
 				error : function(xhr, resp, status){
 				alert('입력하신 정보를 삭제 할 수 없습니다.');
 				}
 			});
-	})
-	
-	$('#reserve #btnSend').on('click', function(){
-		$('#reserveindex').load('mail.reserve');		
 	})
 	
 }
