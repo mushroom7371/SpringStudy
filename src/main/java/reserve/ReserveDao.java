@@ -21,11 +21,11 @@ SqlSession sqlSession;
 		}
 	}
 	
-	public MyReserveVo Select(MyReserveVo vo){
+	public MyReserveVo select(MyReserveVo vo){
 		MyReserveVo vo2 = null;
 		
 		try {
-			
+
 			vo2 = sqlSession.selectOne("reserve_search", vo);
 			
 		}catch(Exception ex) {
@@ -35,18 +35,21 @@ SqlSession sqlSession;
 		return vo2;
 	}
 	
-	public AllReserveVo allSelect(AllReserveVo vo){
-		AllReserveVo vo2 = null;
+	public OtherReserveVo otherSelect(OtherReserveVo v){
+		OtherReserveVo v2 = new OtherReserveVo();
 		
 		try {
+			int r = sqlSession.selectOne("reserve_chkSearch", v);
 			
-			vo2 = sqlSession.selectOne("reserve_allSearch", vo);
+			if(r > 0) {
+				v2 = sqlSession.selectOne("reserve_ohterSearch", v);
+			}
 			
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}
 		
-		return vo2;
+		return v2;
 	}
 
 	public String insert(MyReserveVo vo) {

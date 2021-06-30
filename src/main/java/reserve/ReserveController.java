@@ -167,34 +167,24 @@ public class ReserveController {
 	}
 	
 	@RequestMapping(value="/search.reserve", method= {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView search(MyReserveVo vo) {
+	public ModelAndView search(MyReserveVo vo, OtherReserveVo v) {
 		ModelAndView mv = new ModelAndView();
-		
+
 		System.out.println("Controller.search............");
 		
-		MyReserveVo vo2 = dao.Select(vo);
-		String jumin = vo2.getMyJumin();
+		MyReserveVo vo2 = dao.select(vo);
+		OtherReserveVo v2 = dao.otherSelect(v);
+
+		if(v2.getOtherName().equals("")) {
+			v2.setOtherName(vo2.getMyName());
+			v2.setOtherJumin(vo2.getMyJumin());
+		}
+		
+		String phone = vo2.getMyPhone();
 		
 		mv.addObject("list", vo2);
-		
-		mv.addObject("jumin",jumin);
-		mv.setViewName("reserveSearch");
-		
-		return mv;
-	}
-	
-	@RequestMapping(value="/search.reserve", method= {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView searchAll(AllReserveVo vo) {
-		ModelAndView mv = new ModelAndView();
-		
-		System.out.println("Controller.search............");
-		
-		MyReserveVo vo2 = dao.allSelect(vo);
-		String jumin = vo2.getMyJumin();
-		
-		mv.addObject("list", vo2);
-		
-		mv.addObject("jumin",jumin);
+		mv.addObject("list2", v2);
+		mv.addObject("phone",phone);
 		mv.setViewName("reserveSearch");
 		
 		return mv;
@@ -213,7 +203,7 @@ public class ReserveController {
 	public ModelAndView cancle(MyReserveVo v) {
 		ModelAndView mv = new ModelAndView();
 		
-		MyReserveVo vo = dao.Select(v);		
+		MyReserveVo vo = dao.select(v);		
 		dao.delete(vo);
 		
 		mv.setViewName("reserveSearchAndCancle");

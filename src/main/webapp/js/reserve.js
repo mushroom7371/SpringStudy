@@ -113,7 +113,7 @@ reserve.init = function(){
 		var frm = $('#frm_reserve')[0];
 		var param = $(frm).serialize();
 		
-		if(document.getElementById("myName").value == "" || document.getElementById("myJumin").value == "" || document.getElementById("reserveNum").value == ""){
+		if(document.getElementById("myName").value == "" || document.getElementById("myPhone").value == "" || document.getElementById("reserveNum").value == ""){
 			alert('예약정보를 모두 입력해 주세요.')
 		
 		}else{
@@ -122,7 +122,7 @@ reserve.init = function(){
 				url     : 'search.reserve',
 				data    : param,
 				success : function(resp){
-					if(resp.jumin == null){
+					if(resp.phone == null){
 						alert('조회 화면으로 이동합니다.');
 						$('#reserveindex').load('search.reserve', param);
 					}

@@ -16,12 +16,16 @@
 	</insert>
 	
 	<!-- 조회 -->
-	<select id="reserve_search" parameterType="reserve.MyReserveVo" resultType="reserve.MyReserveVo">
-			select * from MyReserve where myJumin = #{myJumin}
+	<select id="reserve_chkSearch" parameterType="reserve.OtherReserveVo" resultType="Integer">
+			SELECT COUNT(OTHERNAME) FROM OtherReserve WHERE myPhone = #{myPhone}
 	</select>
 	
-	<select id="reserve_allSearch" parameterType="reserve.AllReserveVo" resultType="reserve.AllReserveVo">
-			select * from MyReserve where myJumin = #{myJumin}
+	<select id="reserve_search" parameterType="reserve.MyReserveVo" resultType="reserve.MyReserveVo">
+			select * from MyReserve where myPhone = #{myPhone}
+	</select>
+
+	<select id="reserve_ohterSearch" parameterType="reserve.OtherReserveVo" resultType="reserve.OtherReserveVo">
+			select * from OtherReserve where myPhone = #{myPhone}
 	</select>
 	
 	<!-- 삭제 -->

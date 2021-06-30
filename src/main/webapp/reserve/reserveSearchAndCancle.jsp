@@ -30,8 +30,8 @@
 		<input type='text' name='myName' id='myName'/>
 		<hr/>
 		
-		<label>접종 받는 분 주민등록번호</label>
-		<input type='text' name='myJumin' id='myJumin'/>
+		<label>접종 받는 분 전화번호</label>
+		<input type='text' name='myPhone' id='myPhone'/>
 		<hr/>
 		
 		<label>예약 번호</label>
