@@ -86,6 +86,9 @@ reserve.init = function(){
 		}else if($('#Email').val() == ''){
 			alert('이메일을 입력하세요');
 			return;
+		}else if($('#reserveCenter').val() == ''){
+			alert('예약 병원 및 접종 시간을 입력하세요');
+			return;
 		}else{
 			if(document.getElementById("reserveOk").value != "인증되었습니다"){
 				alert('인증을 완료하여 주세요.')
@@ -137,6 +140,9 @@ reserve.init = function(){
 			return;
 		}else if($('#Email').val() == ''){
 			alert('이메일을 입력하세요');
+			return;
+		}else if($('#reserveCenter').val() == ''){
+			alert('예약 병원 및 접종 시간을 입력하세요');
 			return;
 		}else{
 			if(document.getElementById("reserveOk").value != "인증되었습니다"){

@@ -49,10 +49,13 @@
 		<input type='text' name='reserveVaccine' value='${list.reserveVaccine }'/>
 		<hr/>
 		<label>예약 의료기관</label>
-		<input type='text' name='reserveCenter' value='${list.reserveCenter }'/>
+		<input type='text' name='reserveCenter' value='${list.reserveCenter }' size="50"/>
 		<input type='button' value='의료기관 정보 확인'/>
 		<hr/>
-		<label>접종 일시</label>
+		<label>접종일</label>
+		<input type='text' name='reserveDate' value='${list.reserveDate }'/>
+		<hr/>
+		<label>접종 시간</label>
 		<input type='text' name='reserveTime' value='${list.reserveTime }'/>
 		<hr/>
 		<input type='button' id='btnCancle' value='예약 취소'/>

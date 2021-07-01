@@ -6,10 +6,18 @@ public class MyReserveVo {
 	String myPhone ="";
 	String Email ="";
 	String reserveVaccine ="";
+	String reserveDate = "";
 	String reserveTime ="";
 	String reserveCenter ="";
 	Integer reserveNum = 0;
 	
+	
+	public String getReserveDate() {
+		return reserveDate;
+	}
+	public void setReserveDate(String reserveDate) {
+		this.reserveDate = reserveDate;
+	}
 	public String getMyName() {
 		return myName;
 	}

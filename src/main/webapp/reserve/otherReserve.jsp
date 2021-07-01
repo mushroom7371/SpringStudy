@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
 <script src='./js/reserve.js'></script>
+<script type="text/javascript" src="./vCenter/vCenter.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>대리 예약</title>
 </head>
@@ -75,7 +76,13 @@
 		<hr/>
 		
 		<label>예약 백신</label>
-		<input type='text' name='reserveVaccine'/>
+			<select name='reserveVaccine' id='reserveVaccine'>
+				<option value='얀센'>얀센</option>
+				<option value='화이자'>화이자</option>
+				<option value='모더나'>모더나</option>
+				<option value='시노팜'>시노팜</option>
+				<option value='아스트라제네카'>아스트라제네카</option>
+			</select>
 		<hr/>
 		
 		<label>정보 수신 이메일</label>
@@ -83,13 +90,15 @@
 		<hr/>
 		
 		<label>의료기관 및 예약일시 선택</label>
-		<input type='button' value='의료기관 찾기'/>
+		<input type='button' value='의료기관 찾기' onclick="button_a()"/>
 		<input type='button' id='btnReserveOther' value='예약'/>
 		<input type='button' value='취소' onclick='reserve.doReserve()'/>
 		<hr/>
 		
-		<input type='hidden' name='reserveTime' id='reserveTime'/>
-		<input type='hidden' name='reserveCenter' id='reserveCenter'/>
+		<input type='text' name='reserveTime' id='reserveTime'/>
+		<input type='text' name='reserveDate' id='reserveDate'/>
+		<input type='text' name='reserveCenter' id='reserveCenter'/>
+		<input type='text' name='dong' id='dong'/>
 		
 	</form>
 </div>

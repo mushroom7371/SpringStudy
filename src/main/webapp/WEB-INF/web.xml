@@ -62,5 +62,18 @@
 		<servlet-name>reserve</servlet-name>
 		<url-pattern>*.reserve</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>vCenter</servlet-name>
+		<servlet-class>
+			org.springframework.web.servlet.DispatcherServlet
+		</servlet-class>
+	</servlet>
+	
+	
+	<servlet-mapping>
+		<servlet-name>vCenter</servlet-name>
+		<url-pattern>*.vCenter</url-pattern>
+	</servlet-mapping>
 
 </web-app>
