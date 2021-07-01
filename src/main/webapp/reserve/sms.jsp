@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-<script src='./js/reserve.js'></script>
+<script src='../js/reserve.js'></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>SMS 인증 </title>
 </head>
@@ -25,9 +25,12 @@
 		<input type='button' id='btnSmsSend' value='인증번호 발송'/>
 		<br>
 		<label>인증 번호</label>
-		<input type='text'>
-		<input type='button' id='btnChkNum' value='인증번호 확인'/>
+		<input type='text' name='key' id='key'>
+		<input type='button' id='btnSmsChkNum' value='인증번호 확인'/>
 	</form>
 </div>
+<script>
+reserve.init();
+</script>
 </body>
 </html>

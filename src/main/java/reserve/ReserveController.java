@@ -1,11 +1,13 @@
 package reserve;
 
+import java.util.HashMap;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -15,6 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.JsonObject;
+
+import net.nurigo.java_sdk.api.Message;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @RestController
 public class ReserveController {
@@ -85,6 +90,79 @@ public class ReserveController {
 		 
 		 return result;
 		
+	}
+	
+	@RequestMapping(value = "infoMailSender.reserve", method = {RequestMethod.POST})
+	public String infoMailSender( HttpServletRequest req, HttpServletResponse resp) {
+		JsonObject json = new JsonObject();
+		String chkNum = getKey(6);
+		String authKey = "인증 번호는 " + chkNum + " 입니다.";
+		
+		String setfrom = "wnsghk6670@gmail.com";
+		String tomail = req.getParameter("tomail"); // 받는 사람 이메일
+		String title = "."; // 제목
+		//String content = request.getParameter("content"); // 내용
+		
+		try {
+			
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message,
+					true, "UTF-8");
+			
+			messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
+			messageHelper.setTo(tomail); // 받는사람 이메일
+			messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+			messageHelper.setText(authKey); // 메일 내용
+			
+			mailSender.send(message);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}
+
+		String result = json.toString();
+		
+		return result;
+		
+	}
+	
+	@RequestMapping(value="/smsSender.reserve", method= {RequestMethod.GET,RequestMethod.POST})
+	public String smsSender( HttpServletRequest req, HttpServletResponse resp ) {
+		
+		String api_key = "??";
+	    String api_secret = "??";
+	    Message coolsms = new Message(api_key, api_secret);
+	    
+	    JsonObject json = new JsonObject();
+		String chkNum = getKey(6);
+		String authKey = "인증 번호는 " + chkNum + " 입니다.";
+		String toPhone = req.getParameter("toPhone");
+
+	    // 4 params(to, from, type, text) are mandatory. must be filled
+	    HashMap<String, String> params = new HashMap<String, String>();
+	    params.put("to", toPhone);
+	    params.put("from", "010-9922-7371");
+	    params.put("type", "SMS");
+	    params.put("text", authKey);
+	    params.put("app_version", "test app 1.2"); // application name and version
+
+	    try {
+	      JSONObject obj = (JSONObject) coolsms.send(params);
+	      System.out.println(obj.toString());
+	    } catch (CoolsmsException e) {
+	      System.out.println(e.getMessage());
+	      System.out.println(e.getCode());
+	    }
+	    
+	    json.addProperty("chkNum", chkNum);
+		json.addProperty("toPhone", toPhone);
+		System.out.println(json.get("chkNum"));
+		System.out.println(json.get("toPhone"));
+		String result = json.toString();
+		System.out.println(result);
+
+		return result;
 	}
 	
 	@RequestMapping(value="/doReserve.reserve", method= {RequestMethod.GET,RequestMethod.POST})

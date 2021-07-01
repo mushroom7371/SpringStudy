@@ -4,6 +4,7 @@
 
 var reserve = {};
 var checkNumber;
+var toPhone;
 var tomail;
 
 reserve.doReserve = function(){
@@ -18,7 +19,27 @@ reserve.init = function(){
 	
 	//문자전송	
 	$('#reserve #btnSmsSend').on('click', function(){
-		$('#reserveindex').load('??');		
+		var frm = $('#frm_reserve')[0];
+		var param = $(frm).serialize();
+
+		$.ajax({
+			type    : 'POST',
+			url     : '../smsSender.reserve',
+			data    : param,
+			dataType : "json",
+			success : function(resp) {
+				alert('문자가 전송되었습니다.');
+				
+				checkNumber = resp.chkNum;
+				toPhone = resp.toPhone;
+				
+				alert(checkNumber);
+				
+			},
+			error : function(resp){
+				alert('문자 전송을 실패했습니다.');
+			}
+		});
 	})
 	
 	//메일전송
@@ -52,6 +73,20 @@ reserve.init = function(){
 			alert('인증되었습니다.')
 			self.close();
 			opener.document.getElementById("Email").value = document.getElementById("tomail").value;
+			opener.document.getElementById("reserveOk").value = "인증되었습니다";
+			
+		}else(
+			alert('인증번호를 다시 확인해 주세요.')
+		)
+	})
+	
+	$('#reserve #btnSmsChkNum').on('click', function(){
+		
+		var key = document.getElementById("key").value;
+		
+		if(key == checkNumber){
+			alert('인증되었습니다.')
+			self.close();
 			opener.document.getElementById("reserveOk").value = "인증되었습니다";
 			
 		}else(
@@ -103,7 +138,9 @@ reserve.init = function(){
 					}
 				});	
 			}
-		}		
+		}
+		
+		
 		
 	})
 	
