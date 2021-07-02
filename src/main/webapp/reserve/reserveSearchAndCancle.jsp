@@ -15,6 +15,10 @@
 	display:inline-block;
 	width:200px;
 }
+
+input[type=text]:focus::placeholder{
+color: transparent;
+}
 </style>
 <body>
 <h2>예약 조회/취소</h2>
@@ -27,17 +31,18 @@
 		<br/>
 		
 		<label>접종 받는 분 이름</label>
-		<input type='text' name='myName' id='myName'/>
+		<input type='text' name='myName' id='myName' placeholder="홍길동"/>
 		<hr/>
 		
 		<label>접종 받는 분 전화번호</label>
-		<input type='text' name='myPhone' id='myPhone'/>
+		<input type='text' name='myPhone' id='myPhone' placeholder="010-0000-0000"/>
 		<hr/>
 		
 		<label>예약 번호</label>
-		<input type='text' name='reserveNum' id='reserveNum'/>
+		<input type='text' name='reserveNum' id='reserveNum' placeholder="0000"/>
 
 		<input type='button' id='btnSearch' value='조회하기'/>
+		<input type='button' id='btnFind' value='예약번호 찾기'/>
 		<input type='button' value='취소' onclick='reserve.doReserve()'/>
 		<hr/>
 	

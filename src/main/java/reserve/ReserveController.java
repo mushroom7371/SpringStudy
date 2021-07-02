@@ -92,13 +92,14 @@ public class ReserveController {
 		
 	}
 	
+	//정보메일 발송
 	@RequestMapping(value = "infoMailSender.reserve", method = {RequestMethod.POST})
 	public String infoMailSender( HttpServletRequest req, HttpServletResponse resp) {
 		JsonObject json = new JsonObject();
 
 		String a = "접종 받으실 분 : " + req.getParameter("myName");
 		String b = "접종 받으실 백신 종류 : " + req.getParameter("reserveVaccine");
-		String c = "접종 장소 : " + req.getParameter("reserveCenter");
+		String c = "접종 장소 : " + req.getParameter("reserveCenter") + " " + req.getParameter("facilityName");
 		String d = "접종 일자 및 시간 : " + req.getParameter("reserveDate") + " " + req.getParameter("reserveTime");
 		String f = "예약 번호 : " + num;
 		
@@ -132,6 +133,7 @@ public class ReserveController {
 		
 	}
 	
+	//SMS 전송
 	@RequestMapping(value="/smsSender.reserve", method= {RequestMethod.GET,RequestMethod.POST})
 	public String smsSender( HttpServletRequest req, HttpServletResponse resp ) {
 		
@@ -204,34 +206,42 @@ public class ReserveController {
 		mv.setViewName("reserveSearchAndCancle");
 
 		return mv;
+		
+	}
+	@RequestMapping(value="find.reserve", method= {RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView find() {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("reserveNumFind");
+		
+		return mv;
 	}
 	
+	//본인예약 입력
 	@RequestMapping(value="/insert.reserve", method= {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView register(MyReserveVo vo, HttpServletRequest req, HttpServletResponse resp) {
 		ModelAndView mv = new ModelAndView();
-//		JsonObject json = new JsonObject();
-//		String myPhone = req.getParameter("myPhone");
 		
 		try {
 			req.setCharacterEncoding("utf-8");
 			resp.setContentType("text/html;charset=utf-8");
 			System.out.println("Controller.register....");
-
+			
 			dao.insert(vo);
 			MyReserveVo vo2 = dao.numSelect(vo);
-			
+				
 			this.num = vo2.getReserveNum();
-			
+				
 			mv.setViewName("reserveSearchAndCancle");
 			
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}
-		
-//		json.addProperty("myPhone", myPhone);
+
 		return mv;
 	}
 	
+	//대리자 예약 입력
 	@RequestMapping(value="/otherInsert.reserve", method= {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView registerO(OtherReserveVo vo, HttpServletRequest req, HttpServletResponse resp) {
 		ModelAndView mv = new ModelAndView();
@@ -251,6 +261,7 @@ public class ReserveController {
 		return mv;
 	}
 	
+	//예약 정보 조회
 	@RequestMapping(value="/search.reserve", method= {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView search(MyReserveVo vo, OtherReserveVo v) {
 		ModelAndView mv = new ModelAndView();
@@ -275,6 +286,23 @@ public class ReserveController {
 		return mv;
 	}
 	
+	//예약 번호 찾기
+	@RequestMapping(value="/findNum.reserve", method= {RequestMethod.GET,RequestMethod.POST})
+	public String findNum(MyReserveVo vo) {
+		JsonObject json = new JsonObject();
+		System.out.println("Controller.findNum............");
+		
+		MyReserveVo vo2 = dao.numSelect(vo);
+		
+		int reserveNum = vo2.getReserveNum();
+		
+		json.addProperty("reserveNum", reserveNum);
+		
+		String result = json.toString();
+
+		return result;
+	}
+	
 	@RequestMapping(value="canclePage.reserve", method= {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView canclePage() {
 		ModelAndView mv = new ModelAndView();
@@ -284,6 +312,7 @@ public class ReserveController {
 		return mv;
 	}
 	
+	//예약 취소
 	@RequestMapping(value="/cancle.reserve", method= {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView cancle(MyReserveVo vo, OtherReserveVo v) {
 		ModelAndView mv = new ModelAndView();

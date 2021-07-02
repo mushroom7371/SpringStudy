@@ -9,9 +9,16 @@ public class MyReserveVo {
 	String reserveDate = "";
 	String reserveTime ="";
 	String reserveCenter ="";
+	String facilityName ="";
 	Integer reserveNum = 0;
 	
 	
+	public String getFacilityName() {
+		return facilityName;
+	}
+	public void setFacilityName(String facilityName) {
+		this.facilityName = facilityName;
+	}
 	public String getReserveDate() {
 		return reserveDate;
 	}

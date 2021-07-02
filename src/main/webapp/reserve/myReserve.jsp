@@ -80,13 +80,22 @@ color: transparent;
 		
 		<label>의료기관 및 예약일시 선택</label>
 		<input type='button' id='' value='의료기관 찾기' onclick="button_a()"/>
+		<br/>
+		<label>예약 일시</label>
+		<input type='text' name='reserveTime' id='reserveTime' readonly/>
+		<br/>
+		<label>예약 시간</label>
+		<input type='text' name='reserveDate' id='reserveDate' readonly/>
+		<br/>
+		<label>예약 장소</label>
+		<input type='text' name='reserveCenter' id='reserveCenter'  size="40" readonly/>
+		<br/>
+		<label></label>
+		<input type='text' name='facilityName' id='facilityName'  size="40" readonly/>
 		<input type='button' id='btnReserve' value='예약'/>
 		<input type='button' value='취소' onclick='reserve.doReserve()'/>
 		<hr/>
 
-		<input type='hidden' name='reserveTime' id='reserveTime'/>
-		<input type='hidden' name='reserveDate' id='reserveDate'/>
-		<input type='hidden' name='reserveCenter' id='reserveCenter'/>
 		<input type='hidden' name='dong' id='dong'/>
 
 	</form>

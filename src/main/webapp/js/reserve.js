@@ -239,6 +239,32 @@ reserve.init = function(){
 
 	})
 	
+	$('#reserve #btnFind').on('click', function(){
+		$('#reserveindex').load('find.reserve');		
+	})
+	
+	$('#reserve #btnFindR').on('click', function(){
+		var frm = $('#frm_reserve')[0];
+		var param = $(frm).serialize();
+		
+		if(document.getElementById("myName").value == "" || document.getElementById("myJumin").value == "" || document.getElementById("myPhone").value == ""){
+			alert('접종받는 분 정보를 모두 입력해 주세요.')
+		}else{
+			$.ajax({
+				type    : 'POST',
+				url     : 'findNum.reserve',
+				data    : param,
+				dataType : "json",
+				success : function(resp){
+						alert('예약 번호는 : ' + resp.reserveNum + ' 입니다.');
+				},
+				error : function(xhr, resp, status){
+				alert('입력하신 정보를 조회 할 수 없습니다.');
+				}
+			});
+		}
+	})
+
 	$('#reserve #btnCancle').on('click', function(){
 		$('#reserveindex').load('canclePage.reserve');		
 	})
