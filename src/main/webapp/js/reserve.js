@@ -133,6 +133,11 @@ reserve.init = function(){
 					url     : 'insert.reserve',
 					data    : param,
 					success : function(resp){
+						
+						$.post('infoMailSender.reserve', param, function(){
+							alert('예약정보를 메일로 전송했습니다.');
+						})
+						
 						alert('예약이 완료되었습니다. 조회화면으로 넘어갑니다.');
 						$('#reserveindex').load('sc.reserve');	
 					}
@@ -190,6 +195,11 @@ reserve.init = function(){
 					url     : 'insert.reserve',
 					data    : param,
 					success : function(resp){
+						
+						$.post('infoMailSender.reserve', param, function(){
+							alert('예약정보를 메일로 전송했습니다.');
+						})
+						
 						$.post('otherInsert.reserve', param3, function(data){
 						$('#reserveindex').html(data);
 						

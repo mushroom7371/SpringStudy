@@ -16,6 +16,11 @@
 	display:inline-block;
 	width:200px;
 }
+
+input[type=text]:focus::placeholder{
+color: transparent;
+}
+
 #reserve .btn{
 	 width:150px;height:100px;font-size:20px;
 }
@@ -38,11 +43,11 @@
 		<hr/>
 		
 		<label>대리 예약자 이름</label>
-		<input type='text' name='otherName' id='otherName'/>
+		<input type='text' name='otherName' id='otherName' placeholder="홍길동"/>
 		<hr/>
 		
 		<label>대리 예약자 주민등록번호</label>
-		<input type='text' name='otherJumin' id='otherJumin'/>
+		<input type='text' name='otherJumin' id='otherJumin' placeholder="000000-0000000"/>
 		<hr/>
 		
 		<label>대리 예약자 본인인증</label>
@@ -54,7 +59,7 @@
 		<hr/>
 		
 		<label>대리 예약자 휴대폰 번호</label>
-		<input type='text' name='otherPhone' id='otherPhone'/>
+		<input type='text' name='otherPhone' id='otherPhone' placeholder="010-0000-0000"/>
 		<br/>
 		<span>* 본인 명의의 휴대폰이 아닌경우 온라인 예약이 불가능합니다.</span>
 		<hr/>
@@ -64,15 +69,15 @@
 	<form name='frm_reserve' id='frm_reserve' method='post' action=''>
 		
 		<label>접종 받는 분 이름</label>
-		<input type='text' name='myName'/>
+		<input type='text' name='myName' placeholder="홍길동"/>
 		<hr/>
 		
 		<label>접종 받는 분 전화번호</label>
-		<input type='text' id='myPhone' name='myPhone'/>
+		<input type='text' id='myPhone' name='myPhone' placeholder="010-0000-0000"/>
 		<hr/>
 		
 		<label>접종 받는 분 주민등록번호</label>
-		<input type='text' name='myJumin'/>
+		<input type='text' name='myJumin' placeholder="000000-0000000"/>
 		<hr/>
 		
 		<label>예약 백신</label>
@@ -86,7 +91,7 @@
 		<hr/>
 		
 		<label>정보 수신 이메일</label>
-		<input type='text' name='Email' id='Email'/>
+		<input type='text' name='Email' id='Email' placeholder="1234@1234.com"/>
 		<hr/>
 		
 		<label>의료기관 및 예약일시 선택</label>
@@ -95,10 +100,10 @@
 		<input type='button' value='취소' onclick='reserve.doReserve()'/>
 		<hr/>
 		
-		<input type='text' name='reserveTime' id='reserveTime'/>
-		<input type='text' name='reserveDate' id='reserveDate'/>
-		<input type='text' name='reserveCenter' id='reserveCenter'/>
-		<input type='text' name='dong' id='dong'/>
+		<input type='hidden' name='reserveTime' id='reserveTime'/>
+		<input type='hidden' name='reserveDate' id='reserveDate'/>
+		<input type='hidden' name='reserveCenter' id='reserveCenter'/>
+		<input type='hidden' name='dong' id='dong'/>
 		
 	</form>
 </div>

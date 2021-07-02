@@ -16,6 +16,11 @@
 	display:inline-block;
 	width:200px;
 }
+
+input[type=text]:focus::placeholder{
+color: transparent;
+}
+
 #reserve .btn{
 	 width:150px;height:100px;font-size:20px;
 }
@@ -38,11 +43,11 @@
 		<hr/>
 		
 		<label>이름</label>
-		<input type='text' name='myName' id='myName'/>
+		<input type='text' name='myName' id='myName' placeholder="홍길동"/>
 		<hr/>
 		
 		<label>주민등록번호</label>
-		<input type='text' name='myJumin' id='myJumin'/>
+		<input type='text' name='myJumin' id='myJumin' placeholder="000000-0000000"/>
 		<hr/>
 		
 		<label>본인인증</label>
@@ -64,13 +69,13 @@
 		<hr/>
 		
 		<label>휴대폰 번호</label>
-		<input type='text' name='myPhone' id='myPhone'/>
+		<input type='text' name='myPhone' id='myPhone' placeholder="010-0000-0000"/>
 		<br/>
 		<span>* 본인 명의의 휴대폰이 아닌경우 온라인 예약이 불가능합니다.</span>
 		<hr/>
 		
 		<label>정보 수신 이메일</label>
-		<input type='text' name='Email' id='Email'/>
+		<input type='text' name='Email' id='Email' placeholder="1234@1234.com"/>
 		<hr/>
 		
 		<label>의료기관 및 예약일시 선택</label>
@@ -79,10 +84,10 @@
 		<input type='button' value='취소' onclick='reserve.doReserve()'/>
 		<hr/>
 
-		<input type='text' name='reserveTime' id='reserveTime'/>
-		<input type='text' name='reserveDate' id='reserveDate'/>
-		<input type='text' name='reserveCenter' id='reserveCenter'/>
-		<input type='text' name='dong' id='dong'/>
+		<input type='hidden' name='reserveTime' id='reserveTime'/>
+		<input type='hidden' name='reserveDate' id='reserveDate'/>
+		<input type='hidden' name='reserveCenter' id='reserveCenter'/>
+		<input type='hidden' name='dong' id='dong'/>
 
 	</form>
 </div>

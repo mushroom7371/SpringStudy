@@ -30,7 +30,7 @@ public class ReserveController {
 	private JavaMailSender mailSender;
 	
 	int size;
-	
+	int num;
 	
     //인증키 생성
     private String getKey(int size) {
@@ -95,14 +95,19 @@ public class ReserveController {
 	@RequestMapping(value = "infoMailSender.reserve", method = {RequestMethod.POST})
 	public String infoMailSender( HttpServletRequest req, HttpServletResponse resp) {
 		JsonObject json = new JsonObject();
-		String chkNum = getKey(6);
-		String authKey = "인증 번호는 " + chkNum + " 입니다.";
+
+		String a = "접종 받으실 분 : " + req.getParameter("myName");
+		String b = "접종 받으실 백신 종류 : " + req.getParameter("reserveVaccine");
+		String c = "접종 장소 : " + req.getParameter("reserveCenter");
+		String d = "접종 일자 및 시간 : " + req.getParameter("reserveDate") + " " + req.getParameter("reserveTime");
+		String f = "예약 번호 : " + num;
+		
+		String mailContent = String.format("%s\n%s\n%s\n%s\n%s", a,b,c,d,f);
 		
 		String setfrom = "wnsghk6670@gmail.com";
-		String tomail = req.getParameter("tomail"); // 받는 사람 이메일
-		String title = "."; // 제목
-		//String content = request.getParameter("content"); // 내용
-		
+		String tomail = req.getParameter("Email"); // 받는 사람 이메일
+		String title = "백신 예약정보 안내 메일입니다."; // 제목
+
 		try {
 			
 			MimeMessage message = mailSender.createMimeMessage();
@@ -112,7 +117,7 @@ public class ReserveController {
 			messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
 			messageHelper.setTo(tomail); // 받는사람 이메일
 			messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
-			messageHelper.setText(authKey); // 메일 내용
+			messageHelper.setText(mailContent); // 메일 내용
 			
 			mailSender.send(message);
 			
@@ -205,15 +210,17 @@ public class ReserveController {
 	public ModelAndView register(MyReserveVo vo, HttpServletRequest req, HttpServletResponse resp) {
 		ModelAndView mv = new ModelAndView();
 //		JsonObject json = new JsonObject();
-//		
 //		String myPhone = req.getParameter("myPhone");
 		
 		try {
 			req.setCharacterEncoding("utf-8");
 			resp.setContentType("text/html;charset=utf-8");
 			System.out.println("Controller.register....");
-			
+
 			dao.insert(vo);
+			MyReserveVo vo2 = dao.numSelect(vo);
+			
+			this.num = vo2.getReserveNum();
 			
 			mv.setViewName("reserveSearchAndCancle");
 			
