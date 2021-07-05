@@ -35,6 +35,20 @@ SqlSession sqlSession;
 		return vo2;
 	}
 	
+	public MyReserveVo selectOne(MyReserveVo vo){
+		MyReserveVo vo2 = null;
+		
+		try {
+			
+			vo2 = sqlSession.selectOne("reserve_searchOne", vo);
+			
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return vo2;
+	}
+	
 	public MyReserveVo numSelect(MyReserveVo vo3){
 		MyReserveVo v3 = null;
 		

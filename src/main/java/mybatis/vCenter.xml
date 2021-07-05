@@ -41,6 +41,10 @@
 	<select id="timeChk" parameterType="vCenter.vCenterVo" resultType="Integer">
 		SELECT count(*) FROM MyReserve WHERE reserveCenter = #{centerName } and facilityName = #{facilityName } and reserveTime = #{time} and RESERVEDATE = #{date}
 	</select> 	
+	
+	<select id="mapChk" parameterType="vCenter.vCenterVo" resultType="vCenter.vCenterVo">
+		SELECT lat, lng FROM vCenter WHERE centerName = #{centerName } and FACILITYNAME = #{facilityName }
+	</select> 
 </mapper>   
 
 

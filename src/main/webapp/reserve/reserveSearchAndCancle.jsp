@@ -43,7 +43,7 @@ color: transparent;
 
 		<input type='button' id='btnSearch' value='조회하기'/>
 		<input type='button' id='btnFind' value='예약번호 찾기'/>
-		<input type='button' value='취소' onclick='reserve.doReserve()'/>
+		<input type='button' value='취소' onclick="$('#middle').load('../doReserve.reserve');"/>
 		<hr/>
 	
 	</form>

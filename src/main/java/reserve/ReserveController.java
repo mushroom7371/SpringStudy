@@ -11,6 +11,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,6 +52,22 @@ public class ReserveController {
 
         return buffer.toString();
     }
+    
+    //암호화
+    public String encode(String password) {
+    	BCryptPasswordEncoder ec = new BCryptPasswordEncoder();
+    	String securePw = ec.encode(password);
+    	System.out.println("password 암호화 :"+securePw);
+    	return securePw;
+    	}
+    	
+    //암호화 매칭
+    public Boolean matche(String a, String b) {
+    	BCryptPasswordEncoder ec = new BCryptPasswordEncoder();
+    	Boolean result = ec.matches(a, b);
+    	
+    	return result;
+    	}
 
 	// mailSending 코드
 	@RequestMapping(value = "mailSender.reserve", method = {RequestMethod.POST})
@@ -227,6 +244,12 @@ public class ReserveController {
 			resp.setContentType("text/html;charset=utf-8");
 			System.out.println("Controller.register....");
 			
+			String [] mobNum = vo.getMyJumin().split("-");
+			String first = mobNum[0];
+			String last = mobNum[1];
+			
+			vo.setMyJumin(first + "-" + encode(last));
+			
 			dao.insert(vo);
 			MyReserveVo vo2 = dao.numSelect(vo);
 				
@@ -250,6 +273,12 @@ public class ReserveController {
 			req.setCharacterEncoding("utf-8");
 			resp.setContentType("text/html;charset=utf-8");
 			System.out.println("Controller.registerR....");
+			
+			String [] mobNum = vo.getOtherJumin().split("-");
+			String first = mobNum[0];
+			String last = mobNum[1];
+			
+			vo.setOtherJumin(first + "-" + encode(last));
 			
 			dao.insertO(vo);
 			
@@ -278,6 +307,15 @@ public class ReserveController {
 		
 		String phone = vo2.getMyPhone();
 		
+		String [] mobNum = vo2.getMyJumin().split("-");
+		String first = mobNum[0];
+		vo2.setMyJumin(first + "-*******");
+		
+		String [] mobNum1 = v2.getOtherJumin().split("-");
+		String first1 = mobNum1[0];
+		v2.setOtherJumin(first1 + "-*******");
+		
+		
 		mv.addObject("list", vo2);
 		mv.addObject("list2", v2);
 		mv.addObject("phone",phone);
@@ -291,6 +329,19 @@ public class ReserveController {
 	public String findNum(MyReserveVo vo) {
 		JsonObject json = new JsonObject();
 		System.out.println("Controller.findNum............");
+		
+		String [] mobNum = vo.getMyJumin().split("-");
+		String first = mobNum[0];
+		String last = mobNum[1];
+		
+		MyReserveVo vo3 = dao.selectOne(vo);
+		String [] mobNum1 = vo3.getMyJumin().split("-");
+		String first1 = mobNum1[0];
+		String last1 = mobNum1[1];
+		
+		if(matche(last, last1)) {
+			vo.setMyJumin(first + "-" + last1);
+		}
 		
 		MyReserveVo vo2 = dao.numSelect(vo);
 		

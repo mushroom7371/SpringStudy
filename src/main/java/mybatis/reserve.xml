@@ -24,6 +24,10 @@
 			select * from MyReserve where myPhone = #{myPhone} and myName = #{myName} and reserveNum = #{reserveNum}
 	</select>
 	
+	<select id="reserve_searchOne" parameterType="reserve.MyReserveVo" resultType="reserve.MyReserveVo">
+			select * from MyReserve where myPhone = #{myPhone} and myName = #{myName}
+	</select>
+	
 	<select id="reserve_numSearch" parameterType="reserve.MyReserveVo" resultType="reserve.MyReserveVo">
 			select * from MyReserve where myPhone = #{myPhone} and myName = #{myName} and myJumin = #{myJumin}
 	</select>

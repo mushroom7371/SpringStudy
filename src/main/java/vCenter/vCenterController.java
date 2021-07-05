@@ -169,4 +169,26 @@ public class vCenterController {
 			}
 		}
 
+	  
+	  // 예약자 병원 검색 후 위도 / 경도 가져오기
+	  @RequestMapping(value="/mapChk.vCenter", method= {RequestMethod.GET, RequestMethod.POST})
+	  public void mapChk(vCenterVo vo, HttpServletRequest req , HttpServletResponse resp) { 
+
+		  PrintWriter pw;
+		  
+		  try {
+			  vCenterVo vo2 = dao.mapChk(vo);
+
+			  pw = resp.getWriter();
+
+			  String result = vo2.getLat()+","+vo2.getLng();
+			  
+			  pw.print(result);
+			  
+		  }catch(Exception ex) {
+			  ex.printStackTrace();
+		  }
+	  }
+
+
 }

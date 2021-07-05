@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-<script src='./js/reserve.js'></script>
+<script src='../js/reserve.js'></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>예약번호 찾기</title>
 </head>
@@ -41,7 +41,7 @@ color: transparent;
 		<input type='text' name='myJumin' id='myJumin' placeholder="000000-0000000" maxlength="14"/>
 
 		<input type='button' id='btnFindR' value='예약번호 찾기'/>
-		<input type='button' value='뒤로가기' onclick='reserve.sc()'/>
+		<input type='button' value='뒤로가기' onclick="$('#middle').load('../sc.reserve');"/>
 		<hr/>
 	
 	</form>

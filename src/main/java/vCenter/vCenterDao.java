@@ -164,6 +164,25 @@ public int timeChk2(vCenterVo vo) {
 	}		
 	return r;
 }
+
+
+public vCenterVo mapChk(vCenterVo vo) {
+	vCenterVo vo2 = null;
+	
+	try {		
+		vo2 = sqlSession.selectOne("vCenter.mapChk", vo);
+		
+		if(vo2!=null) {
+			
+		}else {
+			sqlSession.rollback();
+		}
+		
+	}catch(Exception ex) {
+		ex.printStackTrace();
+	}		
+	return vo2;
+}
 		
 	
 }
