@@ -34,11 +34,11 @@ color: transparent;
 		<hr/>
 		
 		<label>접종 받는 분 전화번호</label>
-		<input type='text' name='myPhone' id='myPhone' placeholder="010-0000-0000"/>
+		<input type='text' name='myPhone' id='myPhone' placeholder="010-0000-0000" maxlength="13"/>
 		<hr/>
 		
 		<label>주민등록 번호</label>
-		<input type='text' name='myJumin' id='myJumin' placeholder="000000-0000000"/>
+		<input type='text' name='myJumin' id='myJumin' placeholder="000000-0000000" maxlength="14"/>
 
 		<input type='button' id='btnFindR' value='예약번호 찾기'/>
 		<input type='button' value='뒤로가기' onclick='reserve.sc()'/>
@@ -46,6 +46,9 @@ color: transparent;
 	
 	</form>
 </div>
-<script>reserve.init();</script>
+<script>
+reserve.init();
+reserve.mykeyup();
+</script>
 </body>
 </html>

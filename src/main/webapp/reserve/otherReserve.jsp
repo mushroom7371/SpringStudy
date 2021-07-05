@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
 <script src='./js/reserve.js'></script>
-<script type="text/javascript" src="./vCenter/vCenter.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>대리 예약</title>
 </head>
@@ -47,7 +46,7 @@ color: transparent;
 		<hr/>
 		
 		<label>대리 예약자 주민등록번호</label>
-		<input type='text' name='otherJumin' id='otherJumin' placeholder="000000-0000000"/>
+		<input type='text' name='otherJumin' id='otherJumin' placeholder="000000-0000000" maxlength="14"/>
 		<hr/>
 		
 		<label>대리 예약자 본인인증</label>
@@ -59,7 +58,7 @@ color: transparent;
 		<hr/>
 		
 		<label>대리 예약자 휴대폰 번호</label>
-		<input type='text' name='otherPhone' id='otherPhone' placeholder="010-0000-0000"/>
+		<input type='text' name='otherPhone' id='otherPhone' placeholder="010-0000-0000" maxlength="13"/>
 		<br/>
 		<span>* 본인 명의의 휴대폰이 아닌경우 온라인 예약이 불가능합니다.</span>
 		<hr/>
@@ -77,7 +76,7 @@ color: transparent;
 		<hr/>
 		
 		<label>접종 받는 분 주민등록번호</label>
-		<input type='text' name='myJumin' placeholder="000000-0000000"/>
+		<input type='text' name='myJumin' id='myJumin' placeholder="000000-0000000" maxlength="14"/>
 		<hr/>
 		
 		<label>예약 백신</label>
@@ -118,11 +117,12 @@ color: transparent;
 </div>
 <script>
 reserve.init();
+reserve.otherkeyup();
 function smsPopup() {
-	window.open("./reserve/sms.jsp", "a", "width=850, height=300, left=100, top=50");
+	window.open("../reserve/sms.jsp", "a", "width=850, height=300, left=100, top=50");
 	}
 function emailPopup() {
-	window.open("./reserve/email.jsp", "b", "width=850, height=300, left=100, top=50");
+	window.open("../reserve/email.jsp", "b", "width=850, height=300, left=100, top=50");
 	}
 </script>
 </body>

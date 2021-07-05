@@ -15,6 +15,12 @@
 	display:inline-block;
 	width:200px;
 }
+#reserveMap	{
+	margin: 15px;
+    width: 482px;
+    height: 300px;
+    border: 1px solid black;
+}
 </style>
 <body>
 <h2>예약 결과가 조회 되었습니다.</h2>
@@ -53,7 +59,8 @@
 		<br/>
 		<label></label>
 		<input type='text' name='facilityName' value='${list.facilityName }'/>
-		<input type='button' value='의료기관 정보 확인'/>
+		<label></label>
+		<div id='reserveMap'></div>
 		<hr/>
 		<label>접종일</label>
 		<input type='text' name='reserveDate' value='${list.reserveDate }'/>

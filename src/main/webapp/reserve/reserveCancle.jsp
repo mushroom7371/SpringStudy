@@ -26,11 +26,11 @@
 		<br/>
 		
 		<label>접종 받는 분 이름</label>
-		<input type='text' name='myName' id='myName'/>
+		<input type='text' name='myName' id='myName' placeholder="홍길동"/>
 		<hr/>
 		
 		<label>접종 받는 분 전화번호</label>
-		<input type='text' name='myPhone' id='myPhone'/>
+		<input type='text' name='myPhone' id='myPhone' placeholder="010-0000-0000" maxlength="13"/>
 		<hr/>
 		
 		<label>예약 번호</label>

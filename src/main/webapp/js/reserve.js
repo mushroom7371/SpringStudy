@@ -8,15 +8,7 @@ var toPhone;
 var tomail;
 
 function button_a(){   // 의료기관찾기 버튼 클릭시 윈도우 창으로 띄우기
-	window.open('./vCenter/vCenter.jsp','win','width=517px,height=815px');
-}
-
-reserve.doReserve = function(){
-	$('#reserveindex').load('doReserve.reserve');	
-}
-
-reserve.sc = function(){
-	$('#reserveindex').load('sc.reserve');	
+	window.open('../vCenter/vCenter.jsp','win','width=517px,height=815px');
 }
 
 reserve.init = function(){
@@ -99,11 +91,11 @@ reserve.init = function(){
 	})
 	
 	$('#reserve #btnMyReserve').on('click', function(){
-		$('#reserveindex').load('my.reserve');		
+		$('#middle').load('../my.reserve');		
 	})
 	
 	$('#reserve #btnOtherReserve').on('click', function(){
-		$('#reserveindex').load('other.reserve');		
+		$('#middle').load('../other.reserve');		
 	})
 	
 	$('#reserve #btnReserve').unbind("click").bind("click", function(){
@@ -134,16 +126,16 @@ reserve.init = function(){
 			}else{
 				$.ajax({
 					type    : 'POST',
-					url     : 'insert.reserve',
+					url     : '../insert.reserve',
 					data    : param,
 					success : function(resp){
 						
-						$.post('infoMailSender.reserve', param, function(){
+						$.post('../infoMailSender.reserve', param, function(){
 							alert('예약정보를 메일로 전송했습니다.');
 						})
 						
 						alert('예약이 완료되었습니다. 조회화면으로 넘어갑니다.');
-						$('#reserveindex').load('sc.reserve');	
+						$('#middle').load('../sc.reserve');	
 					}
 				});	
 			}
@@ -196,16 +188,16 @@ reserve.init = function(){
 			}else{
 				$.ajax({
 					type    : 'POST',
-					url     : 'insert.reserve',
+					url     : '../insert.reserve',
 					data    : param,
 					success : function(resp){
 						
-						$.post('infoMailSender.reserve', param, function(){
+						$.post('../infoMailSender.reserve', param, function(){
 							alert('예약정보를 메일로 전송했습니다.');
 						})
 						
-						$.post('otherInsert.reserve', param3, function(data){
-						$('#reserveindex').html(data);
+						$.post('../otherInsert.reserve', param3, function(data){
+						$('#middle').html(data);
 						
 						alert('예약이 완료되었습니다. 조회화면으로 넘어갑니다.');
 					})
@@ -225,12 +217,12 @@ reserve.init = function(){
 		}else{
 			$.ajax({
 				type    : 'POST',
-				url     : 'search.reserve',
+				url     : '../search.reserve',
 				data    : param,
 				success : function(resp){
 					if(resp.phone == null){
 						alert('조회 화면으로 이동합니다.');
-						$('#reserveindex').load('search.reserve', param);
+						$('#middle').load('../search.reserve', param);
 					}
 				},
 				
@@ -244,7 +236,7 @@ reserve.init = function(){
 	})
 	
 	$('#reserve #btnFind').on('click', function(){
-		$('#reserveindex').load('find.reserve');		
+		$('#middle').load('../find.reserve');		
 	})
 	
 	$('#reserve #btnFindR').on('click', function(){
@@ -256,7 +248,7 @@ reserve.init = function(){
 		}else{
 			$.ajax({
 				type    : 'POST',
-				url     : 'findNum.reserve',
+				url     : '../findNum.reserve',
 				data    : param,
 				dataType : "json",
 				success : function(resp){
@@ -270,7 +262,7 @@ reserve.init = function(){
 	})
 
 	$('#reserve #btnCancle').on('click', function(){
-		$('#reserveindex').load('canclePage.reserve');		
+		$('#middle').load('../canclePage.reserve');		
 	})
 	
 	$('#reserve #btnCancleR').on('click', function(){
@@ -279,11 +271,11 @@ reserve.init = function(){
 		
 		$.ajax({
 				type    : 'POST',
-				url     : 'cancle.reserve',
+				url     : '../cancle.reserve',
 				data    : param,
 				success : function(resp){
 						alert('예약이 취소되었습니다. 조회 화면으로 이동합니다.');
-						$('#reserveindex').load('sc.reserve');
+						$('#middle').load('../sc.reserve');
 				},
 				
 				error : function(xhr, resp, status){
@@ -292,48 +284,173 @@ reserve.init = function(){
 			});
 	})
 	
-//데이터입력 양식
-	var autoHypenPhone = function(str){
-      str = str.replace(/[^0-9]/g, '');
-      var tmp = '';
-      if( str.length < 4){
-          return str;
-      }else if(str.length < 7){
-          tmp += str.substr(0, 3);
-          tmp += '-';
-          tmp += str.substr(3);
-          return tmp;
-      }else if(str.length < 11){
-          tmp += str.substr(0, 3);
-          tmp += '-';
-          tmp += str.substr(3, 3);
-          tmp += '-';
-          tmp += str.substr(6);
-          return tmp;
-      }else{              
-          tmp += str.substr(0, 3);
-          tmp += '-';
-          tmp += str.substr(3, 4);
-          tmp += '-';
-          tmp += str.substr(7);
-          return tmp;
-      }
-  
-      return str;
 }
 
-var phoneNum = document.getElementById('myPhone');
-var phoneNum2 = document.getElementById('otherPhone');
-
-phoneNum.onkeyup = function(){
-  console.log(this.value);
-  this.value = autoHypenPhone( this.value ) ;  
+reserve.mykeyup = function(){
+	//데이터입력 양식
+		var autoHypenPhone = function(str){
+	      str = str.replace(/[^0-9]/g, '');
+	      var tmp = '';
+	      if( str.length < 4){
+	          return str;
+	      }else if(str.length < 7){
+	          tmp += str.substr(0, 3);
+	          tmp += '-';
+	          tmp += str.substr(3);
+	          return tmp;
+	      }else if(str.length < 11){
+	          tmp += str.substr(0, 3);
+	          tmp += '-';
+	          tmp += str.substr(3, 3);
+	          tmp += '-';
+	          tmp += str.substr(6);
+	          return tmp;
+	      }else{              
+	          tmp += str.substr(0, 3);
+	          tmp += '-';
+	          tmp += str.substr(3, 4);
+	          tmp += '-';
+	          tmp += str.substr(7);
+	          return tmp;
+	      }
+	      return str;
+	}
+	
+		var autoHypenJumin = function(str){
+	      str = str.replace(/[^0-9]/g, '');
+	      var tmp = '';
+	      if( str.length < 15){
+	          tmp += str.substr(0, 6);
+	          tmp += '-';
+	          tmp += str.substr(6);
+	          return tmp;
+	      }
+	      return str;
+	}
+	
+	var phoneNum = document.getElementById('myPhone');
+	
+	phoneNum.onkeyup = function(){
+	  console.log(this.value);
+	  this.value = autoHypenPhone( this.value ) ;  
+	}
+	
+	var jumin = document.getElementById('myJumin');
+	
+	jumin.onkeyup = function(){
+	  console.log(this.value);
+	  this.value = autoHypenJumin( this.value ) ;  
+	}
 }
 
-phoneNum2.onkeyup = function(){
-  console.log(this.value);
-  this.value = autoHypenPhone( this.value ) ;  
+reserve.otherkeyup = function(){
+	//데이터입력 양식
+		var autoHypenPhone = function(str){
+	      str = str.replace(/[^0-9]/g, '');
+	      var tmp = '';
+	      if( str.length < 4){
+	          return str;
+	      }else if(str.length < 7){
+	          tmp += str.substr(0, 3);
+	          tmp += '-';
+	          tmp += str.substr(3);
+	          return tmp;
+	      }else if(str.length < 11){
+	          tmp += str.substr(0, 3);
+	          tmp += '-';
+	          tmp += str.substr(3, 3);
+	          tmp += '-';
+	          tmp += str.substr(6);
+	          return tmp;
+	      }else{              
+	          tmp += str.substr(0, 3);
+	          tmp += '-';
+	          tmp += str.substr(3, 4);
+	          tmp += '-';
+	          tmp += str.substr(7);
+	          return tmp;
+	      }
+	      return str;
+	}
+	
+		var autoHypenJumin = function(str){
+	      str = str.replace(/[^0-9]/g, '');
+	      var tmp = '';
+	      if( str.length < 15){
+	          tmp += str.substr(0, 6);
+	          tmp += '-';
+	          tmp += str.substr(6);
+	          return tmp;
+	      }
+	      return str;
+	}
+	
+	var phoneNum = document.getElementById('myPhone');
+
+	phoneNum.onkeyup = function(){
+	  console.log(this.value);
+	  this.value = autoHypenPhone( this.value ) ;  
+
+	}
+
+	var phoneNum2 = document.getElementById('otherPhone');
+
+	phoneNum2.onkeyup = function(){
+	  console.log(this.value);
+	  this.value = autoHypenPhone( this.value ) ;  
+	}
+
+	var jumin = document.getElementById('myJumin');
+
+	jumin.onkeyup = function(){
+	  console.log(this.value);
+	  this.value = autoHypenJumin( this.value ) ;  
+	}
+	
+	var jumin2 = document.getElementById('otherJumin');
+	
+	jumin2.onkeyup = function(){
+	  console.log(this.value);
+	  this.value = autoHypenJumin( this.value ) ;  
+	}
+}
+
+reserve.mykeyupchk = function(){
+	//데이터입력 양식
+		var autoHypenPhone = function(str){
+	      str = str.replace(/[^0-9]/g, '');
+	      var tmp = '';
+	      if( str.length < 4){
+	          return str;
+	      }else if(str.length < 7){
+	          tmp += str.substr(0, 3);
+	          tmp += '-';
+	          tmp += str.substr(3);
+	          return tmp;
+	      }else if(str.length < 11){
+	          tmp += str.substr(0, 3);
+	          tmp += '-';
+	          tmp += str.substr(3, 3);
+	          tmp += '-';
+	          tmp += str.substr(6);
+	          return tmp;
+	      }else{              
+	          tmp += str.substr(0, 3);
+	          tmp += '-';
+	          tmp += str.substr(3, 4);
+	          tmp += '-';
+	          tmp += str.substr(7);
+	          return tmp;
+	      }
+	      return str;
+	}
+
+	var phoneNum = document.getElementById('myPhone');
+	
+	phoneNum.onkeyup = function(){
+	  console.log(this.value);
+	  this.value = autoHypenPhone( this.value ) ;  
+	}
+
 }
 	
-}
-

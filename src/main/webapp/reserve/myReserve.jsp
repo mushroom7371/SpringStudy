@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
 <script src='./js/reserve.js'></script>
-<script type="text/javascript" src="./vCenter/vCenter.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>본인 예약</title>
 </head>
@@ -47,7 +46,7 @@ color: transparent;
 		<hr/>
 		
 		<label>주민등록번호</label>
-		<input type='text' name='myJumin' id='myJumin' placeholder="000000-0000000"/>
+		<input type='text' name='myJumin' id='myJumin' placeholder="000000-0000000" maxlength="14"/>
 		<hr/>
 		
 		<label>본인인증</label>
@@ -102,11 +101,12 @@ color: transparent;
 </div>
 <script>
 reserve.init();
+reserve.mykeyup();
 function smsPopup() {
-	window.open("./reserve/sms.jsp", "a", "width=850, height=300, left=100, top=50");
+	window.open("../reserve/sms.jsp", "a", "width=850, height=300, left=100, top=50");
 	}
 function emailPopup() {
-	window.open("./reserve/email.jsp", "b", "width=850, height=300, left=100, top=50");
+	window.open("../reserve/email.jsp", "b", "width=850, height=300, left=100, top=50");
 	}
 </script>
 </body>
