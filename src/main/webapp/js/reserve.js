@@ -7,6 +7,10 @@ var checkNumber;
 var toPhone;
 var tomail;
 
+function button_a(){   // 의료기관찾기 버튼 클릭시 윈도우 창으로 띄우기
+	window.open('./vCenter/vCenter.jsp','win','width=517px,height=815px');
+}
+
 reserve.doReserve = function(){
 	$('#reserveindex').load('doReserve.reserve');	
 }
@@ -287,6 +291,49 @@ reserve.init = function(){
 				}
 			});
 	})
+	
+//데이터입력 양식
+	var autoHypenPhone = function(str){
+      str = str.replace(/[^0-9]/g, '');
+      var tmp = '';
+      if( str.length < 4){
+          return str;
+      }else if(str.length < 7){
+          tmp += str.substr(0, 3);
+          tmp += '-';
+          tmp += str.substr(3);
+          return tmp;
+      }else if(str.length < 11){
+          tmp += str.substr(0, 3);
+          tmp += '-';
+          tmp += str.substr(3, 3);
+          tmp += '-';
+          tmp += str.substr(6);
+          return tmp;
+      }else{              
+          tmp += str.substr(0, 3);
+          tmp += '-';
+          tmp += str.substr(3, 4);
+          tmp += '-';
+          tmp += str.substr(7);
+          return tmp;
+      }
+  
+      return str;
+}
+
+var phoneNum = document.getElementById('myPhone');
+var phoneNum2 = document.getElementById('otherPhone');
+
+phoneNum.onkeyup = function(){
+  console.log(this.value);
+  this.value = autoHypenPhone( this.value ) ;  
+}
+
+phoneNum2.onkeyup = function(){
+  console.log(this.value);
+  this.value = autoHypenPhone( this.value ) ;  
+}
 	
 }
 

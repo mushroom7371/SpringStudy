@@ -69,7 +69,7 @@ color: transparent;
 		<hr/>
 		
 		<label>휴대폰 번호</label>
-		<input type='text' name='myPhone' id='myPhone' placeholder="010-0000-0000"/>
+		<input type='text' name='myPhone' id='myPhone' placeholder="010-0000-0000" maxlength="13"/>
 		<br/>
 		<span>* 본인 명의의 휴대폰이 아닌경우 온라인 예약이 불가능합니다.</span>
 		<hr/>

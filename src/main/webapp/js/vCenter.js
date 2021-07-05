@@ -1,16 +1,17 @@
 /**
  * 
  */
-function button_a(){   // 의료기관찾기 버튼 클릭시 윈도우 창으로 띄우기
-	window.open('./vCenter/vCenter.jsp','win','width=517px,height=720px');
-}
+ // 오늘 날짜 지정
 function time(){
 	var date = document.getElementById('date')
-	date.valueAsDate = new Date();                // 오늘 날짜 지정
-	
+	date.valueAsDate = new Date();       
 }
-function load(){    // 처음 로드할때 시/도 가져오기, 오늘 날짜 지정
-		$.ajax({                                    // 시/도 가져오기
+
+// 처음 로드시
+function load(){    
+	
+// 시/도 가져오기
+		$.ajax({                                    
 				type : 'post',
 				url : "sido.vCenter",
 				success: function(resp){
@@ -20,10 +21,11 @@ function load(){    // 처음 로드할때 시/도 가져오기, 오늘 날짜 �
 					}
 			 	 }
 		  		})
-	}
+}
 	
+// 처음 map 서울 중심으로 띄우기.	
 function initMap()	{
-	      var seoul = {lat: 37.5642135 ,lng: 127.0016985 };       // 처음 map 서울 중심으로 띄우기.
+	      var seoul = {lat: 37.5642135 ,lng: 127.0016985 };       
 	      var map = new google.maps.Map(document.getElementById('center_map'), {
 	          zoom: 17,
 		      center: seoul
@@ -31,9 +33,11 @@ function initMap()	{
 	}	
 
 
+// 시도 변경시 시군구 가져오기
+
 var sido = document.getElementById('sido');
 
-sido.onchange = function(){	// 시도 변경시 시군구 가져오기
+sido.onchange = function(){	
 		param = $(frm_center).serialize();
 		$('#sigungu').children('option:not(:first)').remove();  // 변경될때 시/군/구 리셋
 		$('#dong').children('option:not(:first)').remove();     // 변경될때 읍/면/동 리셋
@@ -51,9 +55,11 @@ sido.onchange = function(){	// 시도 변경시 시군구 가져오기
 	  		})
 }
 	
+
+// 시군구 변경시 읍/면/동 가져오기	
 var sigungu = document.getElementById('sigungu');
 
-sigungu.onchange = function(){    // 시군구 변경시 읍/면/동 가져오기
+sigungu.onchange = function(){    
 		param = $(frm_center).serialize();
 		$('#dong').children('option:not(:first)').remove();
 		
@@ -70,6 +76,7 @@ sigungu.onchange = function(){    // 시군구 변경시 읍/면/동 가져오�
 	  		})
 	}
 	
+// 검색 버튼 클릭시	
 var btn_center_search = document.getElementById('btn_center_search');	
 
 btn_center_search.onclick = function(){	
@@ -84,13 +91,17 @@ btn_center_search.onclick = function(){
 }
 
 
-function ct_info(num){	  // 의료기관 div 클릭시 정보 띄우기
+ // 의료기관 div 클릭시 정보 띄우기
+function ct_info(num){	 
 /*$('#center').on("click",function(){*/
 
 	var rg = document.getElementsByClassName('rg')[num].innerHTML  // 지역정보
 	var cn = document.getElementsByClassName('cn')[num].innerHTML  // 병원이름
-
-    var time = document.getElementsByName('time')  // 라디오 체크박스 리셋  
+	var fn = document.getElementsByClassName('fn')[num].innerHTML  // 시설이름
+	var date = document.getElementById('date').value  // 시설이름
+	
+	
+    var time = document.getElementsByName('time')  // 다른 의료기관 선택시 라디오 체크박스 리셋  
 		for(var i=0; i<time.length; i++){     
 			 if(time[i].checked == true) {
 				time[i].checked = false;
@@ -98,44 +109,53 @@ function ct_info(num){	  // 의료기관 div 클릭시 정보 띄우기
 				}
 			}
 
-	var param = 'rg='+rg+'&cn='+cn;
+	var param = 'rg='+rg+'&centerName='+cn+'&facilityName='+fn+'&date='+date;
+	
+	$('#center_information').load('information.vCenter', param);
+}			
 
-	$.ajax({
-			type : 'post',
-			url : "information.vCenter",
-			data : param,
-			success: function(resp){
-			var a = resp.trim().split(',');
-
-			document.getElementById('center_n').innerHTML = a[0];  // 병원이름
-			document.getElementById('center_f').innerHTML = a[1];  // 시설명
-			document.getElementById('center_p').innerHTML = a[2];  // 연락처
-			document.getElementById('center_a').innerHTML = a[3];  // 주소
+	
+function infor_init(){			
+		
+		// 지도에 마커 표시
+			var lat = document.getElementById('lat').value
+			var lng = document.getElementById('lng').value
+						
+			var center = { lat: Number(lat) ,lng: Number(lng) };  
 			
-			
-			var center = { lat: Number(a[4]) ,lng: Number(a[5]) };  // 위도 / 경도
+			// 마커표시
      		var map = new google.maps.Map(document.getElementById('center_map'),{
           			zoom: 15,
 	      			center: center
     				});
+
 			var marker = new google.maps.Marker({position: center, map: map});   // 맵에 마커 표시
 			
-		 	 }
-	  		})
-	
-	 var rg2 = rg.split(" ");
-	 document.getElementById('dong2').value = rg2[1];   // 히든값에 해당 지역 저장
-	 document.getElementById('centerName2').value = cn;  // 히든 값에 해당 병원명 저장
+		
+		// 시간 체크 후 활성화 여부 확인
+			var timeChk = document.getElementsByClassName('timeChk')
+			var time = document.getElementsByClassName('tl')
+			
+		// 인원수 10명 이상일경우 클릭 이벤트 비활성화
+			for(var i=0;i<timeChk.length;i++){
+				if(timeChk[i].value>=10){
+					time[i].className = 'time_over_people';
+				}
+			}
+			
 }
 
 var cs = document.getElementById('center_select');
 
-cs.onclick = function(){ // 예약선택시
 
-		var dong = document.getElementById('dong2').value;   // 읍/면/동 값
-		var cn = document.getElementById('centerName2').value;  // 병원이름
+// 예약선택시
+cs.onclick = function(){      // 여기서 준화씨한테 보내기전에 인원수 체크한후에 10명 이하면 전송 / 아닐경우 alert 창 띄우기.
+
+		var cn = document.getElementById('center_n').innerHTML;  // 병원이름
+		var fn = document.getElementById('center_f').innerHTML;  // 병원이름
         var time = document.getElementsByName('time')
 		var date = document.getElementById('date').value;
+		
 		
 		for(var i=0; i<time.length; i++){    // 체크된 시간선택(라디오) 값 가져오기
 			 if(time[i].checked == true) {
@@ -144,14 +164,27 @@ cs.onclick = function(){ // 예약선택시
 				}
 			}
 
-		if(timeval==null){
-			alert('병원 및 시간을 선택해주세요')
-		} else{
-			self.close();    // 팝업 창 닫기
-			opener.document.getElementById('dong').value = dong   // 부모창에 값 전달
-			opener.document.getElementById('reserveCenter').value = cn
-			opener.document.getElementById('reserveDate').value = date
-			opener.document.getElementById('reserveTime').value = timeval 
-		}
-			 	
+		if(timeval==null||fn==''){     // 시간 선택 안할시
+			alert('병원 및 시간을 선택해주세요')  // 알림 문구
+		}else{
+			var param = 'centerName='+cn+'&facilityName='+fn+'&time='+timeval+'&date='+date;
+			
+			$.ajax({
+			type : 'post',
+			url : "timeChk.vCenter",
+			data : param,
+			success: function(resp){
+				if(resp>=10){
+					alert("해당 시간에 예약하실수 없습니다.")					
+				}else{
+					self.close();    // 팝업 창 닫기
+			
+					opener.document.getElementById('facilityName').value = fn   // 부모창에 값 전달
+					opener.document.getElementById('reserveCenter').value = cn
+					opener.document.getElementById('reserveDate').value = date
+					opener.document.getElementById('reserveTime').value = timeval	
+					}
+				} 
+	  		})
+		}			 	
 	}

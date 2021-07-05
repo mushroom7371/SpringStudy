@@ -10,6 +10,8 @@ public class vCenterVo {
 	String sido;
 	String sigungu;
 	String dong;
+	String time;
+	String date;
 	
 	
 	public String getAddress() {
@@ -65,6 +67,18 @@ public class vCenterVo {
 	}
 	public void setDong(String dong) {
 		this.dong = dong;
+	}
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
 	}
 	
 

@@ -11,6 +11,7 @@ import mybatis.MybaFactory;
 
 
 public class vCenterDao {
+	private static final int Integer = 0;
 	SqlSession sqlSession;
 	
 	public vCenterDao() {
@@ -96,10 +97,10 @@ public List dong(vCenterVo vo) {
 	return list;
 }
 
-public List<vCenterVo> search(vCenterVo mv) {
+public List<vCenterVo> search(vCenterVo vo) {
 	List<vCenterVo> list = new ArrayList<vCenterVo>();
 	try {
-		list = sqlSession.selectList("vCenter.search", mv); 
+		list = sqlSession.selectList("vCenter.search", vo); 
 		
 		if(list.size()>0) {
 	
@@ -112,12 +113,13 @@ public List<vCenterVo> search(vCenterVo mv) {
 	return list;
 }
 
-public vCenterVo information(vCenterVo mv) {
-	vCenterVo vo = null;
+public vCenterVo information(vCenterVo vo) {
+	vCenterVo vo2 = null;
+	
 	try {
-		vo = sqlSession.selectOne("vCenter.information", mv); 
+		vo2 = sqlSession.selectOne("vCenter.information", vo); 
 		
-		if(vo!=null) {
+		if(vo2!=null) {
 		
 		}else {
 			sqlSession.rollback();
@@ -125,7 +127,42 @@ public vCenterVo information(vCenterVo mv) {
 	}catch(Exception ex) {
 		ex.printStackTrace();
 	}		
-	return vo;
+	return vo2;
+}
+		
+
+public List<Integer> timeChk(vCenterVo vo) {
+	List<Integer> list = new ArrayList<Integer>();
+	
+	try {
+		
+		for(int i=9;i<18;i++) {
+			
+			if(i==9) {
+				vo.setTime(String.format("0%s:00", i));
+			}else {
+			vo.setTime(String.format("%s:00", i));
+			}
+						
+			list.add(sqlSession.selectOne("vCenter.timeChk", vo));
+			
+		}
+	}catch(Exception ex) {
+		ex.printStackTrace();
+	}		
+	return list;
+}
+
+public int timeChk2(vCenterVo vo) {
+	int r = 0;
+	
+	try {		
+		r = sqlSession.selectOne("vCenter.timeChk", vo);
+		
+	}catch(Exception ex) {
+		ex.printStackTrace();
+	}		
+	return r;
 }
 		
 	

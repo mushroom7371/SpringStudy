@@ -25,6 +25,8 @@ public class vCenterController {
 	@Autowired
 	vCenterDao dao;
 	
+	
+	// 시도 검색
 	@RequestMapping(value="/vCenter/sido.vCenter", method= {RequestMethod.GET, RequestMethod.POST})
 	public void sido(HttpServletRequest req , HttpServletResponse resp) { 
 
@@ -52,7 +54,7 @@ public class vCenterController {
 		   }
 	}
 	
-	
+	// 시군구 검색
 	@RequestMapping(value="/vCenter/sigungu.vCenter", method= {RequestMethod.GET, RequestMethod.POST})
 	public void sigungu(HttpServletRequest req , HttpServletResponse resp) { 
 
@@ -80,6 +82,7 @@ public class vCenterController {
 		}
 	}
 	
+	// 읍면동 검색
 	@RequestMapping(value="/vCenter/dong.vCenter", method= {RequestMethod.GET, RequestMethod.POST})
 	public void dong(vCenterVo vo, HttpServletRequest req , HttpServletResponse resp) { 
 		
@@ -108,14 +111,14 @@ public class vCenterController {
 	}
 	
 	
-	  
+	  // 선택된 지역의 병원 검색
 	  @RequestMapping(value="/vCenter/search.vCenter", method= {RequestMethod.GET, RequestMethod.POST}) 
 	  public ModelAndView search(vCenterVo vo) {
 	  ModelAndView mv = new ModelAndView();
 	  
 	  List<vCenterVo> list = null;
 		
-	  list = dao.search(vo);	 
+	  list = dao.search(vo);
 	  
 	  mv.addObject("list",list); 
 	  mv.setViewName("vCenterSearch"); 
@@ -124,31 +127,42 @@ public class vCenterController {
 	  }
 	  
 	  
-		@RequestMapping(value="/vCenter/information.vCenter", method= {RequestMethod.GET, RequestMethod.POST})
-		public void information(vCenterVo vo, HttpServletRequest req , HttpServletResponse resp) { 
-			
-			PrintWriter pw;			
-			
-			 String rg[] = req.getParameter("rg").split(" ");
-			  vo.setDong(rg[rg.length-1]);    // 해당 읍/면/동
-			  vo.setCenterName(req.getParameter("cn"));  // 해당 병원 이름
-			  
-			  vCenterVo vo2  = dao.information(vo);    // 검색
-			
+	  // 선택한 병원 검색
+	  @RequestMapping(value="/vCenter/information.vCenter", method= {RequestMethod.GET, RequestMethod.POST}) 
+	  public ModelAndView information(vCenterVo vo, HttpServletRequest req) {
+	  ModelAndView mv = new ModelAndView();
+	  
+	  List list = null;
+	  
+	  
+	  String rg[] = req.getParameter("rg").split(" ");
+	  vo.setDong(rg[rg.length-1]);    // 해당 읍/면/동
+      
+      
+      vCenterVo vo2  = dao.information(vo);    // 검색
+      list  = dao.timeChk(vo);   // 시간별 인원수 체크
+	 
+	  
+	  mv.addObject("vo",vo2); 
+	  mv.addObject("list",list); 
+	  
+	  mv.setViewName("vCenterSearch2"); 
+	 	  
+	  return mv; 
+	  }	  
+	  		  
+	  
+	  // 예약 전 해당 시간의 인원수 검색
+	  @RequestMapping(value="/vCenter/timeChk.vCenter", method= {RequestMethod.GET, RequestMethod.POST})
+	  public void timeChk(vCenterVo vo, HttpServletRequest req , HttpServletResponse resp) { 
+
+			PrintWriter pw;
+
 			try {
-				String result = null;
-				resp.setCharacterEncoding("UTF-8"); 
-				resp.setContentType("text/html; charset=UTF-8");
+				int r = dao.timeChk2(vo);
 				pw = resp.getWriter();
-				
-				result = vo2.getCenterName()+",";
-				result += vo2.getFacilityName()+",";
-				result += vo2.getPhoneNumber()+",";
-				result += vo2.getAddress()+",";
-				result += vo2.getLat()+",";
-				result += vo2.getLng()+",";						
-						
-				pw.print(result);
+
+				pw.print(r);
 				
 			}catch(Exception ex) {
 				ex.printStackTrace();
