@@ -51,7 +51,8 @@
 		<url-pattern>*.email</url-pattern>
 	</servlet-mapping>
 	
-	 <servlet>
+	<!-- reserve -->
+	<servlet>
 		<servlet-name>reserve</servlet-name>
 		<servlet-class>
 			org.springframework.web.servlet.DispatcherServlet
