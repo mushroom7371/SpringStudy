@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-<script src='../js/reserve.js'></script>
+<script src='/Spring_Final/reservejs/reserve.js'></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>예약 조회</title>
 </head>
@@ -69,7 +69,7 @@
 		<input type='text' name='reserveTime' value='${list.reserveTime }' readonly/>
 		<hr/>
 		<input type='button' id='btnCancle' value='예약 취소'/>
-		<input type='button' value='홈으로'/>
+		<input type='button' value='예약 화면' onclick="$('#middle').load('./doReserve.reserve');"/>
 		<hr/>
 	
 	</form>
@@ -88,7 +88,7 @@ function initMap()	{
 	
 	$.ajax({
 		type: 'post',
-		url : '../mapChk.vCenter',
+		url : './mapChk.vCenter',
 		data : param,
 		success: function(resp){
 			var a = resp.trim().split(',');

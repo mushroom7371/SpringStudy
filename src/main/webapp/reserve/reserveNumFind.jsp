@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-<script src='../js/reserve.js'></script>
+<script src='/Spring_Final/reservejs/reserve.js'></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>예약번호 찾기</title>
 </head>
@@ -34,21 +34,21 @@ color: transparent;
 		<hr/>
 		
 		<label>접종 받는 분 전화번호</label>
-		<input type='text' name='myPhone' id='myPhone' placeholder="010-0000-0000" maxlength="13"/>
+		<input type='text' name='myPhone' id='reservePhone' placeholder="010-0000-0000" maxlength="13"/>
 		<hr/>
 		
 		<label>주민등록 번호</label>
 		<input type='text' name='myJumin' id='myJumin' placeholder="000000-0000000" maxlength="14"/>
 
 		<input type='button' id='btnFindR' value='예약번호 찾기'/>
-		<input type='button' value='뒤로가기' onclick="$('#middle').load('../sc.reserve');"/>
+		<input type='button' value='뒤로가기' onclick="$('#middle').load('./sc.reserve');"/>
 		<hr/>
 	
 	</form>
 </div>
 <script>
 reserve.init();
-reserve.mykeyup();
+reserve.mykeyupchk();
 </script>
 </body>
 </html>

@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-<script src='./js/reserve.js'></script>
+<script src='/Spring_Final/reservejs/reserve.js'></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>조회/취소</title>
 </head>
@@ -35,7 +35,7 @@ color: transparent;
 		<hr/>
 		
 		<label>접종 받는 분 전화번호</label>
-		<input type='text' name='myPhone' id='myPhone' placeholder="010-0000-0000" maxlength="13"/>
+		<input type='text' name='myPhone' id='reservePhone' placeholder="010-0000-0000" maxlength="13"/>
 		<hr/>
 		
 		<label>예약 번호</label>
@@ -43,7 +43,7 @@ color: transparent;
 
 		<input type='button' id='btnSearch' value='조회하기'/>
 		<input type='button' id='btnFind' value='예약번호 찾기'/>
-		<input type='button' value='취소' onclick="$('#middle').load('../doReserve.reserve');"/>
+		<input type='button' value='취소' onclick="$('#middle').load('./doReserve.reserve');"/>
 		<hr/>
 	
 	</form>

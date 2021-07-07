@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-<script src='./js/reserve.js'></script>
+<script src='/Spring_Final/reservejs/reserve.js'></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>본인 예약</title>
 </head>
@@ -68,7 +68,7 @@ color: transparent;
 		<hr/>
 		
 		<label>휴대폰 번호</label>
-		<input type='text' name='myPhone' id='myPhone' placeholder="010-0000-0000" maxlength="13"/>
+		<input type='text' name='myPhone' id='reservePhone' placeholder="010-0000-0000" maxlength="13"/>
 		<br/>
 		<span>* 본인 명의의 휴대폰이 아닌경우 온라인 예약이 불가능합니다.</span>
 		<hr/>
@@ -92,7 +92,7 @@ color: transparent;
 		<label></label>
 		<input type='text' name='facilityName' id='facilityName'  size="40" readonly/>
 		<input type='button' id='btnReserve' value='예약'/>
-		<input type='button' value='취소' onclick='reserve.doReserve()'/>
+		<input type='button' value='취소' onclick="$('#middle').load('./doReserve.reserve');"/>
 		<hr/>
 
 		<input type='hidden' name='dong' id='dong'/>
@@ -103,11 +103,23 @@ color: transparent;
 reserve.init();
 reserve.mykeyup();
 function smsPopup() {
-	window.open("../reserve/sms.jsp", "a", "width=850, height=300, left=100, top=50");
+	var _width = '550';
+    var _height = '250';
+ 
+    var _left = Math.ceil(( window.screen.width - _width )/2);
+    var _top = Math.ceil(( window.screen.height - _height )/3); 
+ 
+    window.open("./reserve/sms.jsp", 'sms', 'width='+ _width +', height='+ _height +', left=' + _left + ', top='+ _top );
 	}
 function emailPopup() {
-	window.open("../reserve/email.jsp", "b", "width=850, height=300, left=100, top=50");
+	var _width = '550';
+    var _height = '250';
+ 
+    var _left = Math.ceil(( window.screen.width - _width )/2);
+    var _top = Math.ceil(( window.screen.height - _height )/3); 
+ 
+    window.open("./reserve/email.jsp", 'e-mail', 'width='+ _width +', height='+ _height +', left=' + _left + ', top='+ _top );
 	}
-</script>
+</script>	
 </body>
 </html>
