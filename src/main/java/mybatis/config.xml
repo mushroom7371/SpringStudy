@@ -18,6 +18,7 @@
 	<mappers>
 		<mapper resource="mybatis/reserve.xml" />
 		<mapper resource="mybatis/vCenter.xml"/>
+		<mapper resource="mybatis/item.xml"/>
 	</mappers>
 
 <!-- mybatis로 데이터베이스에 접근하기위해 xml 파일로 접속 정보를 입력하였음. -->

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="item">
+	<select id="search" parameterType="item.ItemVo" resultType="item.ItemVo">
+		select * from item where pcode = #{findStr}
+	</select>
+	
+	<update id="update" parameterType="item.ItemVo">
+		update item set pname = #{pname}, su = #{su}, price = #{price} where pcode = #{pcode}
+	</update>
+	
+	<delete id="delete" parameterType="item.ItemVo">
+		delete from item where pcode = #{pcode}
+	</delete>
+</mapper>
