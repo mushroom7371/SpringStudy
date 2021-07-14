@@ -88,5 +88,15 @@
 		<servlet-name>item</servlet-name>
 		<url-pattern>*.item</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>test</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>test</servlet-name>
+		<url-pattern>*.test</url-pattern>
+	</servlet-mapping>
 
 </web-app>
